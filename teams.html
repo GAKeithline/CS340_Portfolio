@@ -1,0 +1,175 @@
+<!--Project Group 14 - Sayid Ali and Gilbert Keithline-->
+<!--Date: 11/6/2024-->
+<!--Project Part 3 DRAFT- HTML-->
+
+<!--Citation for 'reveal()' function-->
+<!--Based on Dr. Curry's function 'showForm()' as 
+    demonstrated in Module 6: Exploration- Web Application Technology -->
+<!--Date: 11/05/2024-->
+<!--Source URL: https://canvas.oregonstate.edu/courses/1976520/pages/exploration-web-application-technology?module_item_id=24719064-->
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Slam Dunk- Teams</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' href='dunk.css'>
+    <script language="JavaScript">
+        function reveal(command) {
+            if (command == 'add'){
+                document.getElementById('read').style.display = 'none';
+                document.getElementById('add').style.display = 'block';
+                document.getElementById('edit').style.display = 'none';
+                document.getElementById('remove').style.display = 'none';
+            }
+            else if (command == 'remove'){
+                document.getElementById('read').style.display = 'none';
+                document.getElementById('add').style.display = 'none';
+                document.getElementById('edit').style.display = 'none';
+                document.getElementById('remove').style.display = 'block';
+            }
+            else if (command =='edit'){
+                document.getElementById('read').style.display = 'none';
+                document.getElementById('add').style.display = 'none';
+                document.getElementById('edit').style.display = 'block';
+                document.getElementById('remove').style.display = 'none';
+            }
+            else if (command == 'all'){
+                document.getElementById('read').style.display = 'block';
+                document.getElementById('add').style.display = 'block';
+                document.getElementById('edit').style.display = 'block';
+                document.getElementById('remove').style.display = 'block';
+            }
+            else {
+                document.getElementById('read').style.display = 'block';
+                document.getElementById('add').style.display = 'none';
+                document.getElementById('edit').style.display = 'none';
+                document.getElementById('remove').style.display = 'none';
+            }
+        }
+        function addField() {reveal('add');}
+        function removeField(id) {reveal('remove');}
+        function editField(id) {reveal('edit');}
+        function readFields() {reveal('read');}
+        function revealAll() {reveal('all')}
+    </script>
+</head>
+
+<body onload="readFields()">
+    <header>
+        <H1 align="center"><a href="index.html">Slam Dunk</a></H1>
+        <section>
+            <nav align="center" class="global"> |
+                <a href="users.html">Users</a> |
+                <a href="rosters.html">Rosters</a> |
+                <a href="players.html">Players</a> |
+                <a href="teams.html">Teams</a> |
+                <a href="injuryStatus.html">Injury Status</a> |
+                <a href="playersRosters.html">Players-Rosters</a> |
+            </nav>
+            <H2>Teams</H2>
+            <p><a href="#" onClick="addField()">New Team</a></p>
+        </section>
+    </header>
+
+    <main>
+        <div id="read">
+            <table>
+                <tr>
+                    <th>team_id</th>
+                    <th>team_name</th>
+                    <th>team_win</th>
+                    <th>team_loss</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                <tr>
+                    <td>11</td>
+                    <td>Milwaukee Bucks</td>
+                    <td>1</td>
+                    <td>3</td>
+                    <td><a href="#" onClick="editField('team_id')">Update</a></td>
+                    <td><a href="#" onClick="removeField('team_id')">Remove</a> </td>
+                </tr>
+                <tr>
+                    <td>12</td>
+                    <td>Los Angeles Lakers</td>
+                    <td>3</td>
+                    <td>1</td>
+                    <td><a href="#" onClick="editField('team_id')">Update</a></td>
+                    <td><a href="#" onClick="removeField('team_id')">Remove</a> </td>
+                </tr>
+                <tr>
+                    <td>13</td>
+                    <td>Minnesota Timberwolves</td>
+                    <td>2</td>
+                    <td>1</td>
+                    <td><a href="#" onClick="editField('team_id')">Update</a></td>
+                    <td><a href="#" onClick="removeField('team_id')">Remove</a> </td>
+                </tr>
+                <tr>
+                    <td>14</td>
+                    <td>Cleveland Cavaliers</td>
+                    <td>1</td>
+                    <td>3</td>
+                    <td><a href="#" onClick="editField('team_id')">Update</a></td>
+                    <td><a href="#" onClick="removeField('team_id')">Remove</a> </td>
+                </tr>
+            </table>
+            <p class="fieldBar"><a href="#" onClick="revealAll()">Show Hidden Fields</a> | <a href="#" onClick="readFields()">Hide Fields</a></p>
+            <p>&nbsp;</p>
+        </div>
+
+        <div id="add">
+            <form method="POST" id="addTeam">
+                <legend><strong>Add Team</strong></legend>
+                <fieldset class="acres">
+                    <label>Team Name: </label> <input type="text" name="team_name">
+                    <label>Team Wins: </label> <input type="number" name="team_win">
+                    <label>Team Losses: </label> <input type="number" name="team_loss">
+                    <input class="btn" type="submit" id="addTeam" value="Submit">
+                </fieldset>
+                    <input class="btn" type="button" value="Cancel" onClick="readFields()">
+            </form>
+            <p>&nbsp;</p>
+        </div>
+
+        <div id="edit">
+            <form method="POST" id="editTeam">
+                <legend><strong>Edit Team</strong></legend>
+                <fieldset class="acres">
+                    <input type="hidden" name="user_id" id="editUserID" value="2">
+                    <label>User ID: </label> 12
+                    <label>Team Name: </label> <input type="text" name="team_name" value="Los Angeles Lakers">
+                    <label>Team Wins: </label> <input type="number" name="team_win" value="3">
+                    <label>Team Losses: </label> <input type="number" name="team_loss" value="1">
+                    <input class="btn" type="submit" id="editTeam" value="Submit">
+                </fieldset>
+                    <input class="btn" type="button" value="Cancel" onClick="readFields()">
+            </form>
+            <p>&nbsp;</p>
+        </div>
+
+        <div id="remove">
+            <form method="POST" id="removeTeam">
+                <legend><strong>Remove Team</strong></legend>
+                <fieldset class="acres">
+                    <p>Do you wish to remove: <input type="hidden" name="user_id" id="removeUserID" value="2">
+                        [Team #12 - Los Angeles Lakers]?
+                    </p>
+                    
+                </fieldset>
+                <input class="btn" type="submit" id="removeTeam" value="Remove Team">
+                <input class="btn" type="button" value="Cancel" onClick="readFields()">
+            </form>
+            <p>&nbsp;</p>
+        </div>
+    </main>
+    <footer>
+        &copy; 2024 Gilbert Keithline & Sayid Ali
+    </footer>
+</body>
+</html>

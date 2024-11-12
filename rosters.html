@@ -1,0 +1,173 @@
+<!--Project Group 14 - Sayid Ali and Gilbert Keithline-->
+<!--Date: 11/6/2024-->
+<!--Project Part 3 DRAFT- HTML-->
+
+<!--Citation for 'reveal()' function-->
+<!--Based on Dr. Curry's function 'showForm()' as 
+    demonstrated in Module 6: Exploration- Web Application Technology -->
+<!--Date: 11/05/2024-->
+<!--Source URL: https://canvas.oregonstate.edu/courses/1976520/pages/exploration-web-application-technology?module_item_id=24719064-->
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Slam Dunk- Rosters</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' href='dunk.css'>
+    <script language="JavaScript">
+        function reveal(command) {
+            if (command == 'add'){
+                document.getElementById('read').style.display = 'none';
+                document.getElementById('add').style.display = 'block';
+                document.getElementById('edit').style.display = 'none';
+                document.getElementById('remove').style.display = 'none';
+            }
+            else if (command == 'remove'){
+                document.getElementById('read').style.display = 'none';
+                document.getElementById('add').style.display = 'none';
+                document.getElementById('edit').style.display = 'none';
+                document.getElementById('remove').style.display = 'block';
+            }
+            else if (command =='edit'){
+                document.getElementById('read').style.display = 'none';
+                document.getElementById('add').style.display = 'none';
+                document.getElementById('edit').style.display = 'block';
+                document.getElementById('remove').style.display = 'none';
+            }
+            else if (command == 'all'){
+                document.getElementById('read').style.display = 'block';
+                document.getElementById('add').style.display = 'block';
+                document.getElementById('edit').style.display = 'block';
+                document.getElementById('remove').style.display = 'block';
+            }
+            else {
+                document.getElementById('read').style.display = 'block';
+                document.getElementById('add').style.display = 'none';
+                document.getElementById('edit').style.display = 'none';
+                document.getElementById('remove').style.display = 'none';
+            }
+        }
+        function addField() {reveal('add');}
+        function removeField(id) {reveal('remove');}
+        function editField(id) {reveal('edit');}
+        function readFields() {reveal('read');}
+        function revealAll() {reveal('all')}
+    </script>
+</head>
+
+<body onload="readFields()">
+    <header>
+        <H1 align="center"><a href="index.html">Slam Dunk</a></H1>
+        <section>
+            <nav align="center" class="global"> |
+                <a href="users.html">Users</a> |
+                <a href="rosters.html">Rosters</a> |
+                <a href="players.html">Players</a> |
+                <a href="teams.html">Teams</a> |
+                <a href="injuryStatus.html">Injury Status</a> |
+                <a href="playersRosters.html">Players-Rosters</a> |
+            </nav>
+            <H2>Rosters</H2>
+            <p><a href="#" onClick="addField()">New Roster</a></p>
+        </section>
+    </header>
+
+    <main>
+        <div id="read">
+            <table>
+                <tr>
+                    <th>roster_id</th>
+                    <th>roster_name</th>
+                    <th>user_id</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td>Globetrotters</td>
+                    <td>2</td>
+                    <td><a href="#" onClick="editField('roster_id')">Update</a></td>
+                    <td><a href="#" onClick="removeField('roster_id')">Remove</a> </td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td>Moonwalkers</td>
+                    <td>1</td>
+                    <td><a href="#" onClick="editField('roster_id')">Update</a></td>
+                    <td><a href="#" onClick="removeField('roster_id')">Remove</a> </td>
+                </tr>
+                <tr>
+                    <td>10</td>
+                    <td>Astrosteppers</td>
+                    <td>4</td>
+                    <td><a href="#" onClick="editField('roster_id')">Update</a></td>
+                    <td><a href="#" onClick="removeField('roster_id')">Remove</a> </td>
+                </tr>
+                <tr>
+                    <td>11</td>
+                    <td>Galaxy Joggers</td>
+                    <td>1</td>
+                    <td><a href="#" onClick="editField('roster_id')">Update</a></td>
+                    <td><a href="#" onClick="removeField('roster_id')">Remove</a> </td>
+                </tr>
+            </table>
+            <p class="fieldBar"><a href="#" onClick="revealAll()">Show Hidden Fields</a> | <a href="#" onClick="readFields()">Hide Fields</a></p>
+            <p>&nbsp;</p>
+        </div>
+
+        <div id="add">
+            <form method="POST" id="addRoster">
+                <legend><strong>New Roster</strong></legend>
+                <fieldset class="acres">
+                    <label>Roster name: </label> <input type="text" name="roster_name">
+                    <label>User ID: </label> <input type="number" name="user_id">
+                    <input class="btn" type="submit" id="addRoster" value="Submit">
+                </fieldset>
+                    <input class="btn" type="button" value="Cancel" onClick="readFields()">
+            </form>
+            <p>&nbsp;</p>
+        </div>
+
+        <div id="edit">
+            <form method="POST" id="editRoster">
+                <legend><strong>Edit Roster</strong></legend>
+                <fieldset class="acres">
+                    <input type="hidden" name="roster_id" id="editRosterID" value="11">
+                    <label>Roster ID: </label> 11
+                    <label>Roster name: </label> <input type="text" name="roster_name" value="Galaxyjoggers">
+                    <label>User ID: </label> <select name="user_id">
+                        <option value="0">&nbsp;</option>
+                        <option value="1">1</option>
+                        <option value="2" selected="selected">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select>
+                    <input class="btn" type="submit" id="editRoster" value="Submit">
+                </fieldset>
+                    <input class="btn" type="button" value="Cancel" onClick="readFields()">
+            </form>
+            <p>&nbsp;</p>
+        </div>
+
+        <div id="remove">
+            <form method="POST" id="removeRoster">
+                <legend><strong>Delete Roster</strong></legend>
+                <fieldset class="acres">
+                    <p>Do you wish to delete the following roster? </p>
+                    <input type="hidden" name="roster_id" id="removeRostererID" value="9">
+                    <label>Roster #9 - Moonwalkers</label>
+                </fieldset>
+                <input class="btn" type="submit" id="removeRoster" value="Remove Roster">
+                <input class="btn" type="button" value="Cancel" onClick="readFields()">
+            </form>
+            <p>&nbsp;</p>
+        </div>
+    </main>
+    <footer>
+        &copy; 2024 Gilbert Keithline & Sayid Ali
+    </footer>
+</body>
+</html>

@@ -1,0 +1,172 @@
+<!--Project Group 14 - Sayid Ali and Gilbert Keithline-->
+<!--Date: 11/6/2024-->
+<!--Project Part 3 DRAFT- HTML-->
+
+<!--Citation for 'reveal()' function-->
+<!--Based on Dr. Curry's function 'showForm()' as 
+    demonstrated in Module 6: Exploration- Web Application Technology -->
+<!--Date: 11/05/2024-->
+<!--Source URL: https://canvas.oregonstate.edu/courses/1976520/pages/exploration-web-application-technology?module_item_id=24719064-->
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Slam Dunk- Users</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' href='dunk.css'>
+    <script language="JavaScript">
+        function reveal(command) {
+            if (command == 'add'){
+                document.getElementById('read').style.display = 'none';
+                document.getElementById('add').style.display = 'block';
+                document.getElementById('edit').style.display = 'none';
+                document.getElementById('remove').style.display = 'none';
+            }
+            else if (command == 'remove'){
+                document.getElementById('read').style.display = 'none';
+                document.getElementById('add').style.display = 'none';
+                document.getElementById('edit').style.display = 'none';
+                document.getElementById('remove').style.display = 'block';
+            }
+            else if (command =='edit'){
+                document.getElementById('read').style.display = 'none';
+                document.getElementById('add').style.display = 'none';
+                document.getElementById('edit').style.display = 'block';
+                document.getElementById('remove').style.display = 'none';
+            }
+            else if (command == 'all'){
+                document.getElementById('read').style.display = 'block';
+                document.getElementById('add').style.display = 'block';
+                document.getElementById('edit').style.display = 'block';
+                document.getElementById('remove').style.display = 'block';
+            }
+            else {
+                document.getElementById('read').style.display = 'block';
+                document.getElementById('add').style.display = 'none';
+                document.getElementById('edit').style.display = 'none';
+                document.getElementById('remove').style.display = 'none';
+            }
+        }
+        function addField() {reveal('add');}
+        function removeField(id) {reveal('remove');}
+        function editField(id) {reveal('edit');}
+        function readFields() {reveal('read');}
+        function revealAll() {reveal('all')}
+    </script>
+</head>
+
+<body onload="readFields()">
+    <header>
+        <H1 align="center"><a href="index.html">Slam Dunk</a></H1>
+        <section>
+            <nav align="center" class="global"> |
+                <a href="users.html">Users</a> |
+                <a href="rosters.html">Rosters</a> |
+                <a href="players.html">Players</a> |
+                <a href="teams.html">Teams</a> |
+                <a href="injuryStatus.html">Injury Status</a> |
+                <a href="playersRosters.html">Players-Rosters</a> |
+            </nav>
+            <H2>Users</H2>
+            <p><a href="#" onClick="addField()">Add User</a></p>
+        </section>
+    </header>
+
+    <main>
+        <div id="read">
+            <table>
+                <tr>
+                    <th>user_id</th>
+                    <th>user_name</th>
+                    <th>user_email</th>
+                    <th>user_password</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Alex Keithline</td>
+                    <td>keithlig@oregonstate.edu</td>
+                    <td>123456</td>
+                    <td><a href="#" onClick="editField('user_id')">Update</a></td>
+                    <td><a href="#" onClick="removeField('user_id')">Remove</a> </td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Sayid Ali</td>
+                    <td>als@oregonstate.edu</td>
+                    <td>654321</td>
+                    <td><a href="#" onClick="editField('user_id')">Update</a></td>
+                    <td><a href="#" onClick="removeField('user_id')">Remove</a> </td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Some Dude</td>
+                    <td>some.dude@gmail.com</td>
+                    <td>123321</td>
+                    <td><a href="#" onClick="editField('user_id')">Update</a></td>
+                    <td><a href="#" onClick="removeField('user_id')">Remove</a> </td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>Some Lady</td>
+                    <td>some.lady@msn.com</td>
+                    <td>321123</td>
+                    <td><a href="#" onClick="editField('user_id')">Update</a></td>
+                    <td><a href="#" onClick="removeField('user_id')">Remove</a> </td>
+                </tr>
+            </table>
+            <p class="fieldBar"><a href="#" onClick="revealAll()">Show Hidden Fields</a> | <a href="#" onClick="readFields()">Hide Fields</a></p>
+            <p>&nbsp;</p>
+        </div>
+
+        <div id="add">
+            <form method="POST" id="addUser">
+                <legend><strong>Add User</strong></legend>
+                <fieldset class="acres">
+                    <label>First and last name: </label> <input type="text" name="user_name">
+                    <label>Email address: </label> <input type="text" name="user_email">
+                    <label>Password: </label> <input type="text" name="user_password">
+                    <input class="btn" type="submit" id="addUser" value="Submit">
+                </fieldset>
+                    <input class="btn" type="button" value="Cancel" onClick="readFields()">
+            </form>
+            <p>&nbsp;</p>
+        </div>
+
+        <div id="edit">
+            <form method="POST" id="editUser">
+                <legend><strong>Edit User</strong></legend>
+                <fieldset class="acres">
+                    <input type="hidden" name="user_id" id="editUserID" value="2">
+                    <label>User ID: </label> 2
+                    <label>First and last name: </label> <input type="text" name="user_name" value="Sayid Ali">
+                    <label>Email Address: </label> <input type="text" name="user_email" value="als@oregonstate.edu">
+                    <label>Password: </label> <input type="text" name="user_password" value="654321">
+                    <input class="btn" type="submit" id="editUser" value="Submit">
+                </fieldset>
+                    <input class="btn" type="button" value="Cancel" onClick="readFields()">
+            </form>
+            <p>&nbsp;</p>
+        </div>
+
+        <div id="remove">
+            <form method="POST" id="removeUser">
+                <legend><strong>Remove User</strong></legend>
+                <fieldset class="acres">
+                    <p>Do you wish to remove: <input type="hidden" name="user_id" id="removeUserID" value="2"> User #2 - Sayid Ali?</p>
+                </fieldset>
+                <input class="btn" type="submit" id="removeUser" value="Remove User">
+                <input class="btn" type="button" value="Cancel" onClick="readFields()">
+            </form>
+            <p>&nbsp;</p>
+        </div>
+    </main>
+    <footer>
+        &copy; 2024 Gilbert Keithline & Sayid Ali
+    </footer>
+</body>
+</html>
