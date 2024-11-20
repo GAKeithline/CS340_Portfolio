@@ -59,8 +59,7 @@
                 <a href="playersRosters.html">Players-Rosters</a> |
             </p>
         <section>
-            <H2 align="center">Users</H2>
-            <p align="center"><a href="#" onClick="addField()">Add User</a></p>
+            <H2 align="center">Edit Users</H2>
         </section>
     </header>
 
@@ -94,7 +93,7 @@
         <p>&nbsp;</p>
         </div> <!-- read -->
 
-        <div id="edit">
+        <div id="edit" align="center">
                 <form method="POST" id="editUser" action="/editUser/{{user_data[0].user_id}}">
                     <legend><strong>Edit User</strong></legend>
                     <fieldset class="acres">
@@ -105,7 +104,7 @@
                         <label>Password: </label> <input type="text" name="user_password" class="form-control" id="user_password" name="user_password" placeholder="{{user_data[0].user_password}}">
                         <input class="btn" type="submit" name = "editUser" id="editUser" value="Submit">
                     </fieldset>
-                        <input class="btn" type="button" value="Cancel" onClick="readFields()">
+                        <a href="/users">Cancel</a>
                 </form>
                 <p>&nbsp;</p>
         </div> <!-- edit -->
