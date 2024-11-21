@@ -5,58 +5,18 @@
     <title>Slam Dunk- Edit Users</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' href="{{ url_for('static', filename='dunk.css')}}">
-    <script language="JavaScript">
-    <script language="JavaScript">
-        function reveal(command) {
-            if (command == 'add'){
-                document.getElementById('read').style.display = 'none';
-                document.getElementById('add').style.display = 'block';
-                document.getElementById('edit').style.display = 'none';
-                document.getElementById('remove').style.display = 'none';
-            }
-            else if (command == 'remove'){
-                document.getElementById('read').style.display = 'none';
-                document.getElementById('add').style.display = 'none';
-                document.getElementById('edit').style.display = 'none';
-                document.getElementById('remove').style.display = 'block';
-            }
-            else if (command =='edit'){
-                document.getElementById('read').style.display = 'none';
-                document.getElementById('add').style.display = 'none';
-                document.getElementById('edit').style.display = 'block';
-                document.getElementById('remove').style.display = 'none';
-            }
-            else if (command == 'all'){
-                document.getElementById('read').style.display = 'block';
-                document.getElementById('add').style.display = 'block';
-                document.getElementById('edit').style.display = 'block';
-                document.getElementById('remove').style.display = 'block';
-            }
-            else {
-                document.getElementById('read').style.display = 'block';
-                document.getElementById('add').style.display = 'none';
-                document.getElementById('edit').style.display = 'none';
-                document.getElementById('remove').style.display = 'none';
-            }
-        }
-        function addField() {reveal('add');}
-        function removeField(id) {reveal('remove');}
-        function editField(id) {reveal('edit');}
-        function readFields() {reveal('read');}
-        function revealAll() {reveal('all')}
-    </script>
 </head>
 
     <body>
     <header>
-        <H1 align="center"><a href="index.html">Slam Dunk</a></H1>
+        <H1 align="center"><a href="/index">Slam Dunk</a></H1>
         <p align="center" class="global"> |
                 <a href="/users">Users</a> |
-                <a href="rosters.html">Rosters</a> |
-                <a href="players.html">Players</a> |
-                <a href="teams.html">Teams</a> |
-                <a href="injuryStatus.html">Injury Status</a> |
-                <a href="playersRosters.html">Players-Rosters</a> |
+                <a href="#">Rosters</a> |
+                <a href="#">Players</a> |
+                <a href="#">Teams</a> |
+                <a href="#">Injury Status</a> |
+                <a href="#">Players-Rosters</a> |
             </p>
         <section>
             <H2 align="center">Edit Users</H2>
@@ -64,44 +24,14 @@
     </header>
 
     <main>
-        <div id="read">
-            <table align="center">
-                {% if user_data %}
-                    <thead>
-                        <tr align="left" border-bottom="3px solid black">
-                            {% for key in user_data[0].keys() %}
-                            <th scope='col' data-field='{{ key }}' data-filter-control='input'>{{ key }}</th>
-                            {% endfor %}
-                            <th></th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for item in user_data %}
-                            <tr>
-                                {% for key in item.keys() %}
-                                <td> {{item[key]}} </td>
-                                {% endfor %}
-                                <td><a href="editUser/{{item.user_id}}">Update</a></td>
-                                <td><a href="#" onClick="removeField('user_id')">Remove</a> </td>
-                            </tr>
-                            {% endfor %}
-                    </tbody>
-                {% endif %}
-            </table>
-        <p align="center" class="fieldBar"><a href="#" onClick="revealAll()">Show Hidden Fields</a> | <a href="#" onClick="readFields()">Hide Fields</a></p>
-        <p>&nbsp;</p>
-        </div> <!-- read -->
-
         <div id="edit" align="center">
                 <form method="POST" id="editUser" action="/editUser/{{user_data[0].user_id}}">
-                    <legend><strong>Edit User</strong></legend>
                     <fieldset class="acres">
                         <input type="hidden" class="form-control" name="user_id" id="user_id" value="{{user_data[0].user_id}}" required>
                         <label>User ID: </label> {{user_data[0].user_id}}
-                        <label>First and last name: </label> <input type="text" class="form-control" id="user_name" name="user_name" placeholder="{{user_data[0].user_name}}">
-                        <label>Email Address: </label> <input type="text" name="user_email" class="form-control" id="user_email" name="user_email" placeholder="{{user_data[0].user_email}}">
-                        <label>Password: </label> <input type="text" name="user_password" class="form-control" id="user_password" name="user_password" placeholder="{{user_data[0].user_password}}">
+                        <label>First and last name: </label> <input type="text" class="form-control" id="user_name" name="user_name" placeholder="{{user_data[0].user_name}}" value="{{user_data[0].user_name}}">
+                        <label>Email Address: </label> <input type="text" name="user_email" class="form-control" id="user_email" name="user_email" placeholder="{{user_data[0].user_email}}" value="{{user_data[0].user_email}}">
+                        <label>Password: </label> <input type="text" name="user_password" class="form-control" id="user_password" name="user_password" placeholder="{{user_data[0].user_password}}" value="{{user_data[0].user_password}}">
                         <input class="btn" type="submit" name = "editUser" id="editUser" value="Submit">
                     </fieldset>
                         <a href="/users">Cancel</a>
