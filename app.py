@@ -103,6 +103,71 @@ def editUser(id):
                 mysql.connection.commit()
                 
         return redirect("/users")
+    
+
+@app.route("/teams", methods=["POST", "GET"])
+# 'Display' Teams table and enable 'Create' functionality
+def teams():
+    # Render the table (Display)
+    if request.method == 'GET':
+        query = 'SELECT team_id as ID, team_name as "Team Name", team_win as Wins, team_loss as Losses FROM Teams;'
+        cursor = mysql.connection.cursor()
+        cursor.execute(query)
+        team_data = cursor.fetchall()
+
+        return render_template('teams.j2', team_data = team_data)
+    
+    # Add a new Team (Create)
+    if request.method == 'POST':
+        if request.form.get("addTeam"):
+            name = request.form["team_name"]
+            win = request.form["team_win"]
+            loss = request.form["team_loss"]
+
+            query = 'INSERT INTO Teams (team_name, team_win, team_loss) VALUES (%s, %s, %s);'
+            cursor = mysql.connection.cursor()
+            cursor.execute(query, (name, win, loss))
+            mysql.connection.commit()
+        
+        return redirect("/teams")
+    
+@app.route("/removeTeam/<int:id>")
+# 'Remove' a table item
+def removeTeam(id):
+    # Deletes a Team (Remove)
+    query = "DELETE FROM Teams WHERE team_id = '%s';"
+    cursor = mysql.connection.cursor()
+    cursor.execute(query, (id,))
+    mysql.connection.commit()
+
+    return redirect("/teams")
+
+@app.route("/editTeam/<int:id>", methods=["POST", "GET"])
+# Enables 'Update' funtionality for Team items
+def editTeam(id):
+    # Renders the update template
+    if request.method == "GET":
+        query = 'SELECT * FROM Teams WHERE team_id =%s' % (id)
+        cursor = mysql.connection.cursor()
+        cursor.execute(query)
+        team_data = cursor.fetchall()
+
+        return render_template("editTeam.j2", team_data=team_data)
+    
+    # Allows database user to change row information based on user_id selection (Update)
+    if request.method == "POST":
+        if request.form.get("editTeam"):
+                id = request.form["team_id"]
+                name = request.form["team_name"]
+                win = request.form["team_win"]
+                loss = request.form["team_loss"]
+
+                query = "UPDATE Teams SET team_name = %s, team_win = %s, team_loss = %s WHERE team_id = %s"
+                cursor = mysql.connection.cursor()
+                cursor.execute(query, (name, win, loss, id))
+                mysql.connection.commit()
+                
+        return redirect("/teams")
 
 
 # Listener

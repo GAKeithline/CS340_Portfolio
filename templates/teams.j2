@@ -1,19 +1,8 @@
-<!--Project Group 14 - Sayid Ali and Gilbert Keithline-->
-<!--Date: 11/6/2024-->
-<!--Project Part 3 DRAFT- HTML-->
-
-<!--Citation for 'reveal()' function-->
-<!--Based on Dr. Curry's function 'showForm()' as 
-    demonstrated in Module 6: Exploration- Web Application Technology -->
-<!--Date: 11/05/2024-->
-<!--Source URL: https://canvas.oregonstate.edu/courses/1976520/pages/exploration-web-application-technology?module_item_id=24719064-->
-
-
 <html>
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Slam Dunk- Users</title>
+    <title>Slam Dunk- Teams</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' href="{{ url_for('static', filename='dunk.css')}}">
     <script language="JavaScript">
@@ -69,18 +58,18 @@
                 <a href="#">Players-Rosters</a> |
             </p>
         <section>
-            <H2 align="center">Users</H2>
-            <p align="center"><a href="#" onClick="addField()">Add User</a></p>
+            <H2 align="center">Teams</H2>
+            <p align="center"><a href="#" onClick="addField()">Add Team</a></p>
         </section>
     </header>
 
     <main>
         <div id="read">
             <table align="center">
-                {% if user_data %}
+                {% if team_data %}
                     <thead>
                         <tr align="left" border-bottom="3px solid black">
-                            {% for key in user_data[0].keys() %}
+                            {% for key in team_data[0].keys() %}
                             <th scope='col' data-field='{{ key }}' data-filter-control='input'>{{ key }}</th>
                             {% endfor %}
                             <th></th>
@@ -88,13 +77,13 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% for row in user_data %}
+                        {% for row in team_data %}
                             <tr>
                                 {% for key in row.keys() %}
                                 <td> {{row[key]}} </td>
                                 {% endfor %}
-                                <td><a href="editUser/{{row.ID}}">Update</a></td>
-                                <td><a href="removeUser/{{row.ID}}">Remove</a> </td>
+                                <td><a href="editTeam/{{row.ID}}">Update</a></td>
+                                <td><a href="removeTeam/{{row.ID}}">Remove</a> </td>
                             </tr>
                         {% endfor %}
                     </tbody>
@@ -104,23 +93,15 @@
         </div> <!-- read -->
 
         <div id="add" align="center">
-            <form method="POST" id="addUser" action="/users">
-                <legend><strong>Add User</strong></legend>
+            <form method="POST" id="addTeam" action="/teams">
+                <legend><strong>Add Team</strong></legend>
                 <fieldset class="acres">
-                    <label>First and last name: </label> <input type="text" name="user_name" class="form-control" id="uname" placeholder="name" required>
-                    <label>Email address: </label> <input type="text" name="user_email" class="form-control" id="uemail" placeholder="email" required>
-                    <label>Password: </label> <input type="text" name="user_password" class="form-control" id="upword" placeholder="password" required>
-                    <input class="btn" type="submit" id="addUser" name="addUser" value="Submit">
+                    <label>Team Name: </label> <input type="text" name="team_name" class="form-control" id="tname" placeholder="Team Name" required>
+                    <label>Team Wins: </label> <input type="number" name="team_win" class="form-control" id="twin" placeholder="0">
+                    <label>Team Losses: </label> <input type="number" name="team_loss" class="form-control" id="tloss" placeholder="0">
+                    <input class="btn" type="submit" id="addTeam" name="addTeam" value="Submit">
                 </fieldset>
                     <input class="btn" type="button" value="Cancel" onClick="readFields()">
             </form>
             <p>&nbsp;</p>
-        </div> <!-- add -->
-
-
-    </main>
-    <footer>
-        &copy; 2024 Gilbert Keithline & Sayid Ali
-    </footer>
-</body>
-</html>
+        </div> <!--add-->

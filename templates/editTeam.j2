@@ -1,0 +1,45 @@
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Slam Dunk- Edit Teams</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' href="{{ url_for('static', filename='dunk.css')}}">
+</head>
+
+    <body>
+    <header>
+        <H1 align="center"><a href="/index">Slam Dunk</a></H1>
+        <p align="center" class="global"> |
+                <a href="/users">Users</a> |
+                <a href="#">Rosters</a> |
+                <a href="#">Players</a> |
+                <a href="/teams">Teams</a> |
+                <a href="#">Injury Status</a> |
+                <a href="#">Players-Rosters</a> |
+            </p>
+        <section>
+            <H2 align="center">Edit Teams</H2>
+        </section>
+    </header>
+
+    <div id="edit" align="center">
+            <form method="POST" id="editTeam" action="/editTeam/{{team_data[0].team_id}}">
+                <legend><strong>Edit Team</strong></legend>
+                <fieldset class="acres">
+                    <input type="hidden" class="form-control" name="team_id" id="team_id" value="{{team_data[0].team_id}}" required">
+                    <label>Team ID: </label> {{team_data[0].team_id}}
+                    <label>Team Name: </label> <input type="text" class="form-control" name="team_name" id="team_name" placeholder="{{team_data[0].team_name}}" value="{{team_data[0].team_name}}">
+                    <label>Team Wins: </label> <input type="number" class="form-control" name="team_win" id="team_win" placeholder="{{team_data[0].team_win}}" value="{{team_data[0].team_win}}">
+                    <label>Team Losses: </label> <input type="number" class="form-control" name="team_loss" id="team_loss" placeholder="{{team_data[0].team_loss}}" value="{{team_data[0].team_loss}}">
+                    <input class="btn" type="submit" name="editTeam" id="editTeam" value="Submit">
+                </fieldset>
+                    <a href="/teams">Cancel</a>
+            </form>
+            <p>&nbsp;</p>
+        </div> <!--edit-->
+        <footer>
+            &copy; 2024 Gilbert Keithline & Sayid Ali
+        </footer>
+    </body>
+</html>
