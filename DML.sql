@@ -59,7 +59,7 @@ WHERE Teams.team_name = :teamNameSelection;
 -- Players
 
 -- Retrieve Players (player_id, player_name, stats)
-SELECT player_id, player_name, point_stat, assist_stat, rebound_stat, block_stat, steal_stat, timePlayed_stat 
+SELECT player_id, player_name, point_stat, assist_stat, rebound_stat, block_stat, steal_stat, timePlayed_stat, team_id, injury_tag 
 FROM Players;
 
 -- Sort Players descending by stat
@@ -136,17 +136,17 @@ WHERE player_id = :playerIDInput AND roster_id = :rosterIDInput;
 
 -- Injury_Status
 
--- Retrieve Injury Statuses (injury_id, injury_name)
-SELECT injury_id, injury_name 
+-- Retrieve Injury Statuses (injury_id, injury_description)
+SELECT injury_tag, injury_description 
 FROM Injury_Status;
 
 -- Insert new Injury Status
-INSERT INTO Injury_Status (injury_id, injury_name)
+INSERT INTO Injury_Status (injury_tag, injury_description)
 VALUES (:injuryIDInput, :injuryNameInput);
 
 -- Update an Injury Status description
 UPDATE Injury_Status 
-SET injury_name = :injuryNameInput
+SET injury_description = :injuryDescriptionInput
 WHERE injury_id = :injuryIDInput;
 
 -- Delete an Injury Status

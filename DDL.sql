@@ -15,9 +15,11 @@ DROP TABLE IF EXISTS Injury_Status;
 
 -- Create Injury_Status Table
 CREATE OR REPLACE TABLE Injury_Status (
-    injury_id varchar(5) NOT NULL,
+    injury_id int NOT NULL AUTO_INCREMENT,
+    injury_tag varchar(5) NOT NULL UNIQUE,
     injury_description varchar(145),
     PRIMARY KEY (injury_id)
+
 );
 
 -- Create Users Table
@@ -66,7 +68,7 @@ CREATE OR REPLACE TABLE Players (
     FOREIGN KEY (team_id) REFERENCES Teams(team_id)
         ON UPDATE CASCADE
         ON DELETE SET NULL,
-    FOREIGN KEY (injury_id) REFERENCES Injury_Status(injury_id)
+    FOREIGN KEY (injury_id) REFERENCES Injury_Status(injury_tag)
         ON UPDATE CASCADE
         ON DELETE SET NULL
 );
@@ -90,7 +92,7 @@ CREATE OR REPLACE TABLE Players_Rosters (
 -- =====================================================
 
 -- Insert data into Injury_Status Table
-INSERT INTO Injury_Status (injury_id, injury_description) VALUES
+INSERT INTO Injury_Status (injury_tag, injury_description) VALUES
 ('QUES', 'Questionable: Player is day to day. Likely to play, but may sit out.'),
 ('DOUBT', 'Doubtful: Player is unlikely to play, possibly could.'),
 ('OUT', 'Out: Player is not playing this week.'),
@@ -121,8 +123,8 @@ INSERT INTO Rosters (roster_id, roster_name, user_id) VALUES
 -- Insert data into Players Table
 INSERT INTO Players (player_id, player_name, point_stat, assist_stat, rebound_stat, block_stat, steal_stat, timePlayed_stat, team_id, injury_id) VALUES
 (1, 'Lebron James', 20, 7, 7, 1, 0, 35, 12, NULL),
-(2, 'Anthony Edwards', 28, 4, 6, 0, 1, 40, 13, 'QUES'),
-(3, 'Kris Middleton', NULL, NULL, NULL, NULL, NULL, NULL, 11, 'OUT'),
+(2, 'Anthony Edwards', 28, 4, 6, 0, 1, 40, 13, 1, 'QUES'),
+(3, 'Kris Middleton', NULL, NULL, NULL, NULL, NULL, NULL, 11, 3, 'OUT'),
 (4, 'Dean Wade', 7, 2, 5, NULL, 1, 23, 14, NULL);
 
 -- Insert data into Players_Rosters Table

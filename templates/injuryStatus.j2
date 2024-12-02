@@ -1,14 +1,3 @@
-<!--Project Group 14 - Sayid Ali and Gilbert Keithline-->
-<!--Date: 11/6/2024-->
-<!--Project Part 3 DRAFT- HTML-->
-
-<!--Citation for 'reveal()' function-->
-<!--Based on Dr. Curry's function 'showForm()' as 
-    demonstrated in Module 6: Exploration- Web Application Technology -->
-<!--Date: 11/05/2024-->
-<!--Source URL: https://canvas.oregonstate.edu/courses/1976520/pages/exploration-web-application-technology?module_item_id=24719064-->
-
-
 <html>
 <head>
     <meta charset='utf-8'>
@@ -69,7 +58,7 @@
                 <a href="#">Players-Rosters</a> |
             </p>
         <section>
-            <H2 align="center">Users</H2>
+            <H2 align="center">Injury Status</H2>
             <p align="center"><a href="#" onClick="addField()">Add User</a></p>
         </section>
     </header>
@@ -77,10 +66,10 @@
     <main>
         <div id="read">
             <table align="center">
-                {% if user_data %}
+                {% if injury_data %}
                     <thead>
                         <tr align="left" border-bottom="3px solid black">
-                            {% for key in user_data[0].keys() %}
+                            {% for key in injury_data[0].keys() %}
                             <th scope='col' data-field='{{ key }}' data-filter-control='input'>{{ key }}</th>
                             {% endfor %}
                             <th></th>
@@ -88,13 +77,13 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% for row in user_data %}
+                        {% for row in injury_data %}
                             <tr>
                                 {% for key in row.keys() %}
                                 <td> {{row[key]}} </td>
                                 {% endfor %}
-                                <td><a href="editUser/{{row.ID}}">Update</a></td>
-                                <td><a href="removeUser/{{row.ID}}">Remove</a> </td>
+                                <td><a href="editInjury/{{row.ID}}">Update</a></td>
+                                <td><a href="removeInjury/{{row.ID}}">Remove</a> </td>
                             </tr>
                         {% endfor %}
                     </tbody>
@@ -104,13 +93,12 @@
         </div> <!-- read -->
 
         <div id="add" align="center">
-            <form method="POST" id="addUser" action="/users">
-                <legend><strong>Add User</strong></legend>
+            <form method="POST" id="addInjury" action="/injuryStatus">
+                <legend><strong>Add Status</strong></legend>
                 <fieldset class="acres">
-                    <label>First and last name: </label> <input type="text" name="user_name" class="form-control" id="uname" placeholder="name" required>
-                    <label>Email address: </label> <input type="text" name="user_email" class="form-control" id="uemail" placeholder="email" required>
-                    <label>Password: </label> <input type="text" name="user_password" class="form-control" id="upword" placeholder="password" required>
-                    <input class="btn" type="submit" id="addUser" name="addUser" value="Submit">
+                    <label>Injury Tag: </label> <input type="text" name="injury_tag" class="form-control" id="itag" placeholder="Tag" required>
+                    <label>Injury Description: </label> <textarea name="injury_description" class="form-control" id="idesc" placeholder="Description" required></textarea>
+                    <input class="btn" type="submit" id="addInjury" name="addInjury" value="Submit">
                 </fieldset>
                     <input class="btn" type="button" value="Cancel" onClick="readFields()">
             </form>
