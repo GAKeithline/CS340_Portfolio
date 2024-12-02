@@ -1,0 +1,135 @@
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Slam Dunk- Players</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' href="{{ url_for('static', filename='dunk.css')}}">
+    <script language="JavaScript">
+        function reveal(command) {
+            if (command == 'add'){
+                document.getElementById('read').style.display = 'none';
+                document.getElementById('add').style.display = 'block';
+                document.getElementById('edit').style.display = 'none';
+                document.getElementById('remove').style.display = 'none';
+            }
+            else if (command == 'remove'){
+                document.getElementById('read').style.display = 'none';
+                document.getElementById('add').style.display = 'none';
+                document.getElementById('edit').style.display = 'none';
+                document.getElementById('remove').style.display = 'block';
+            }
+            else if (command =='edit'){
+                document.getElementById('read').style.display = 'none';
+                document.getElementById('add').style.display = 'none';
+                document.getElementById('edit').style.display = 'block';
+                document.getElementById('remove').style.display = 'none';
+            }
+            else if (command == 'all'){
+                document.getElementById('read').style.display = 'block';
+                document.getElementById('add').style.display = 'block';
+                document.getElementById('edit').style.display = 'block';
+                document.getElementById('remove').style.display = 'block';
+            }
+            else {
+                document.getElementById('read').style.display = 'block';
+                document.getElementById('add').style.display = 'none';
+                document.getElementById('edit').style.display = 'none';
+                document.getElementById('remove').style.display = 'none';
+            }
+        }
+        function addField() {reveal('add');}
+        function removeField(id) {reveal('remove');}
+        function editField(id) {reveal('edit');}
+        function readFields() {reveal('read');}
+        function revealAll() {reveal('all')}
+    </script>
+</head>
+
+<body onload="readFields()">
+    <header>
+        <H1 align="center"><a href="index">Slam Dunk</a></H1>
+        <p align="center" class="global"> |
+                <a href="users">Users</a> |
+                <a href="#">Rosters</a> |
+                <a href="players">Players</a> |
+                <a href="teams">Teams</a> |
+                <a href="injuryStatus">Injury Status</a> |
+                <a href="#">Players-Rosters</a> |
+            </p>
+        <section>
+            <H2 align="center">Players</H2>
+            <p align="center"><a href="#" onClick="addField()">Add Player</a></p>
+        </section>
+    </header>
+
+    <main>
+        <div id="read">
+            <table align="center">
+                {% if player_data %}
+                    <thead>
+                        <tr align="left" border-bottom="3px solid black">
+                            {% for key in player_data[0].keys() %}
+                            <th scope='col' data-field='{{ key }}' data-filter-control='input'>{{ key }}</th>
+                            {% endfor %}
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in player_data %}
+                            <tr>
+                                {% for key in row.keys() %}
+                                <td> {{row[key]}} </td>
+                                {% endfor %}
+                                <td><a href="editPlayer/{{row.ID}}">Update</a></td>
+                                <td><a href="removePlayer/{{row.ID}}">Remove</a> </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                {% endif %}
+            </table>
+        <p>&nbsp;</p>
+        </div> <!-- read -->
+
+        <div id="add" align="center">
+            <form method="POST" id="addPlayer" action="/players">
+                <legend><strong>Add Player</strong></legend>
+                <fieldset class="acres">
+                    <label>Player Name: </label> <input type="text" name="player_name" class="form-control" id="pname" placeholder="Player Name" required>
+                    <label>Points: </label> <input type="number" name="player_points" class="form-control" id="points" placeholder="0" required>
+                    <label>Assists: </label> <input type="number" name="player_assists" class="form-control" id="assists" placeholder="0" required>
+                    <label>Rebounds: </label> <input type="number" name="player_rebounds" class="form-control" id="rebounds" placeholder="0" required>
+                    <label>Blocks: </label> <input type="number" name="player_blocks" class="form-control" id="blocks" placeholder="0" required>
+                    <label>Steals: </label> <input type="number" name="player_steals" class="form-control" id="steals" placeholder="0" required>
+                    <label>Minutes: </label> <input type="number" name="player_minutes" class="form-control" id="minutes" placeholder="0" required>
+                    <label>Team ID: </label> 
+                        <select name="player_team" class="form-control" id="player_team">
+                        {% for row in team_data %}
+                            {% for key in row.keys() %}
+                                <option value ={{row[key]}}>{{row[key]}}</option>
+                            {% endfor %}
+                        {% endfor %}
+                        </select>
+                    <label>Injury Status: </label> 
+                        <select name="player_injury" class="form-control" id="player_injury">
+                        {% for row in injury_data %}
+                            {% for key in row.keys() %}
+                                <option value ={{row[key]}}>{{row[key]}}</option>
+                            {% endfor %}
+                        {% endfor %}
+                        </select>
+                    <input class="btn" type="submit" id="addPlayer" name="addPlayer" value="Submit">
+                </fieldset>
+                    <input class="btn" type="button" value="Cancel" onClick="readFields()">
+            </form>
+            <p>&nbsp;</p>
+        </div> <!-- add -->
+
+
+    </main>
+    <footer>
+        &copy; 2024 Gilbert Keithline & Sayid Ali
+    </footer>
+</body>
+</html>
