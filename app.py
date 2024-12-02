@@ -273,6 +273,61 @@ def players():
             mysql.connection.commit()
         
         return redirect("/players")
+    
+@app.route("/removePlayer/<int:id>")
+# 'Remove' a table item
+def removePlayer(id):
+    # Deletes a User (Remove)
+    query = "DELETE FROM Players WHERE player_id = '%s';"
+    cursor = mysql.connection.cursor()
+    cursor.execute(query, (id,))
+    mysql.connection.commit()
+
+    return redirect("/players")
+
+
+@app.route("/editPlayer/<int:id>", methods=["POST", "GET"])
+# Enables 'Update' funtionality for User items
+def editPlayer(id):
+    # Renders the update template
+    if request.method == "GET":
+        query = 'SELECT * FROM Players WHERE player_id =%s' % (id)
+        cursor = mysql.connection.cursor()
+        cursor.execute(query)
+        player_data = cursor.fetchall()
+
+        query2 = "SELECT team_id FROM Teams"
+        cur = mysql.connection.cursor()
+        cur.execute(query2)
+        team_data = cur.fetchall()
+
+        query3 = "SELECT injury_tag FROM Injury_Status"
+        cur = mysql.connection.cursor()
+        cur.execute(query3)
+        injury_data = cur.fetchall()
+
+        return render_template("editPlayer.j2", player_data=player_data, team_data=team_data, injury_data=injury_data)
+    
+    # Allows database user to change row information based on user_id selection (Update)
+    if request.method == "POST":
+        if request.form.get("editPlayer"):
+            id = request.form["player_id"]
+            name = request.form["player_name"]
+            points = request.form["player_points"]
+            assists = request.form["player_assists"]
+            rebounds = request.form["player_rebounds"]
+            blocks = request.form["player_blocks"]
+            steals = request.form["player_steals"]
+            minutes = request.form["player_minutes"]
+            team = request.form["player_team"]
+            injury = request.form["player_injury"]
+
+            query = "UPDATE Players SET player_name = %s, point_stat = %s, assist_stat = %s, rebound_stat = %s, block_stat = %s, steal_stat = %s, timePlayed_stat = %s, team_id = %s, injury_id = %s WHERE player_id = %s;"
+            cursor = mysql.connection.cursor()
+            cursor.execute(query, (name, points, assists, rebounds, blocks, steals, minutes, team, injury, id))
+            mysql.connection.commit()
+                
+        return redirect("/players")
 
 
 # Listener
