@@ -242,17 +242,22 @@ def players():
         cursor.execute(query)
         player_data = cursor.fetchall()
 
-        query2 = "SELECT team_id FROM Teams"
+        query2 = "SELECT team_id FROM Teams;"
         cur = mysql.connection.cursor()
         cur.execute(query2)
         team_data = cur.fetchall()
 
-        query3 = "SELECT injury_tag FROM Injury_Status"
+        query3 = "SELECT injury_tag FROM Injury_Status;"
         cur = mysql.connection.cursor()
         cur.execute(query3)
         injury_data = cur.fetchall()
 
-        return render_template('players.j2', player_data = player_data, team_data = team_data, injury_data = injury_data)
+        query4 = 'SELECT roster_id FROM Rosters;'
+        cur = mysql.connection.cursor()
+        cur.execute(query4)
+        roster_data = cur.fetchall()
+
+        return render_template('players.j2', player_data = player_data, team_data = team_data, injury_data = injury_data, roster_data = roster_data)
     
     # Add a new user (Create)
     if request.method == 'POST':
@@ -267,9 +272,9 @@ def players():
             team = request.form["player_team"]
             injury = request.form["player_injury"]
 
-            query4 = "INSERT INTO Players (player_name, point_stat, assist_stat, rebound_stat, block_stat, steal_stat, timePlayed_stat, team_id, injury_id) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s);"
+            query = "INSERT INTO Players (player_name, point_stat, assist_stat, rebound_stat, block_stat, steal_stat, timePlayed_stat, team_id, injury_id) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s);"
             cursor = mysql.connection.cursor()
-            cursor.execute(query4, (name, points, assists, rebounds, blocks, steals, minutes, team, injury))
+            cursor.execute(query, (name, points, assists, rebounds, blocks, steals, minutes, team, injury))
             mysql.connection.commit()
         
         return redirect("/players")
@@ -306,7 +311,12 @@ def editPlayer(id):
         cur.execute(query3)
         injury_data = cur.fetchall()
 
-        return render_template("editPlayer.j2", player_data=player_data, team_data=team_data, injury_data=injury_data)
+        query4 = 'SELECT roster_id FROM Rosters;'
+        cur = mysql.connection.cursor()
+        cur.execute(query4)
+        roster_data = cur.fetchall()
+
+        return render_template("editPlayer.j2", player_data=player_data, team_data=team_data, injury_data=injury_data, roster_data=roster_data)
     
     # Allows database user to change row information based on user_id selection (Update)
     if request.method == "POST":
@@ -406,7 +416,7 @@ def editRoster(id):
 def relations():
     # Render the table (Display)
     if request.method == 'GET':
-        query = "SELECT playerRoster_id as ID, player_id as 'Player ID', roster_id as Roster_ID FROM Players_Rosters;"
+        query = "SELECT playerRoster_id as ID, player_id as 'Player ID', roster_id as 'Roster ID' FROM Players_Rosters;"
         cursor = mysql.connection.cursor()
         cursor.execute(query)
         pr_data = cursor.fetchall()
@@ -498,7 +508,7 @@ def viewRoster(id):
 # 'Remove' a table item
 def viewTeam(id):
     # Deletes a User (Remove)
-    query = "SELECT Teams.team_id as ID, Teams.team_name as 'Team Name', Players.player_name as Player, Rosters.roster_id as Roster FROM Players JOIN Teams ON Players.team_id = Teams.team_id JOIN Players_Rosters ON Players.player_id = Players_Rosters.player_id WHERE Teams.team_id = %s;" % (id)
+    query = "SELECT Teams.team_id as ID, Teams.team_name as 'Team Name', Players.player_name as Player FROM Players JOIN Teams ON Players.team_id = Teams.team_id WHERE Teams.team_id = %s;" % (id)
     cursor = mysql.connection.cursor()
     cursor.execute(query)
     team_data = cursor.fetchall()
