@@ -1,0 +1,58 @@
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Slam Dunk- Edit Relation</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' href="{{ url_for('static', filename='dunk.css')}}">
+</head>
+
+    <body>
+    <header>
+        <H1 align="center"><a href="/index">Slam Dunk</a></H1>
+        <p align="center" class="global"> |
+                <a href="/users">Users</a> |
+                <a href="/rosters">Rosters</a> |
+                <a href="/players">Players</a> |
+                <a href="/teams">Teams</a> |
+                <a href="/injuryStatus">Injury Status</a> |
+                <a href="/playersRosters">Players-Rosters</a> |
+            </p>
+        <section>
+            <H2 align="center">Edit Relations</H2>
+        </section>
+    </header>
+
+    <main>
+        <div id="edit" align="center">
+                <form method="POST" id="editRelation" action="/editRelation/{{relation_data[0].playerRoster_id}}">
+                    <fieldset class="acres">
+                        <input type="hidden" class="form-control" name="pr_id" id="pr_id" value="{{relation_data[0].playerRoster_id}}" required>
+                        <label>Relation ID: </label> {{relation_data[0].playerRoster_id}}
+                        <label>Player ID: </label> 
+                            <select name="player" class="form-control" id="player">
+                            {% for row in player_data %}
+                                {% for key in row.keys() %}
+                                    <option value ={{row[key]}} {% if row[key] == relation_data[0].player_id %} selected {% endif %}>{{row[key]}}</option>
+                                {% endfor %}
+                            {% endfor %}
+                            </select>
+                        <label>Roster ID</label>
+                            <select name="roster" class="form-control" id="roster">
+                            {% for row in roster_data %}
+                                {% for key in row.keys() %}
+                                    <option value ={{row[key]}} {% if row[key] == relation_data[0].roster_id %} selected {% endif %}>{{row[key]}}</option>
+                                {% endfor %}
+                            {% endfor %}
+                            </select>
+                        <input class="btn" type="submit" name = "editRelation" id="editRelation" value="Submit">
+                    </fieldset>
+                        <a href="/playersRosters">Cancel</a>
+                </form>
+                <p>&nbsp;</p>
+        </div> <!-- edit -->
+        <footer>
+            &copy; 2024 Gilbert Keithline & Sayid Ali
+        </footer>
+    </body>
+</html>

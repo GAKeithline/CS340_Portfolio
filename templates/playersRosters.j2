@@ -2,7 +2,7 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Slam Dunk- Players</title>
+    <title>Slam Dunk- Players-Rosters</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' href="{{ url_for('static', filename='dunk.css')}}">
     <script language="JavaScript">
@@ -58,18 +58,18 @@
                 <a href="playersRosters">Players-Rosters</a> |
             </p>
         <section>
-            <H2 align="center">Players</H2>
-            <p align="center"><a href="#" onClick="addField()">Add Player</a></p>
+            <H2 align="center">Player-Roster Relationships</H2>
+            <p align="center"><a href="#" onClick="addField()">Add Relationship</a></p>
         </section>
     </header>
 
     <main>
         <div id="read">
             <table align="center">
-                {% if player_data %}
+                {% if pr_data %}
                     <thead>
                         <tr align="left" border-bottom="3px solid black">
-                            {% for key in player_data[0].keys() %}
+                            {% for key in pr_data[0].keys() %}
                             <th scope='col' data-field='{{ key }}' data-filter-control='input'>{{ key }}</th>
                             {% endfor %}
                             <th></th>
@@ -77,13 +77,13 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% for row in player_data %}
+                        {% for row in pr_data %}
                             <tr>
                                 {% for key in row.keys() %}
                                 <td> {{row[key]}} </td>
                                 {% endfor %}
-                                <td><a href="editPlayer/{{row.ID}}">Update</a></td>
-                                <td><a href="removePlayer/{{row.ID}}">Remove</a> </td>
+                                <td><a href="editRelation/{{row.ID}}">Update</a></td>
+                                <td><a href="removeRelation/{{row.ID}}">Remove</a> </td>
                             </tr>
                         {% endfor %}
                     </tbody>
@@ -93,34 +93,26 @@
         </div> <!-- read -->
 
         <div id="add" align="center">
-            <form method="POST" id="addPlayer" action="/players">
-                <legend><strong>Add Player</strong></legend>
+            <form method="POST" id="addRelation" action="/playersRosters">
+                <legend><strong>Add Relation</strong></legend>
                 <fieldset class="acres">
-                    <label>Player Name: </label> <input type="text" name="player_name" class="form-control" id="pname" placeholder="Player Name" required>
-                    <label>Points: </label> <input type="number" name="player_points" class="form-control" id="points" placeholder="0" value="0" required>
-                    <label>Assists: </label> <input type="number" name="player_assists" class="form-control" id="assists" placeholder="0" value="0" required>
-                    <label>Rebounds: </label> <input type="number" name="player_rebounds" class="form-control" id="rebounds" placeholder="0" value="0"required>
-                    <p></p>
-                    <label>Blocks: </label> <input type="number" name="player_blocks" class="form-control" id="blocks" placeholder="0" value="0"required>
-                    <label>Steals: </label> <input type="number" name="player_steals" class="form-control" id="steals" placeholder="0" value="0"required>
-                    <label>Minutes: </label> <input type="number" name="player_minutes" class="form-control" id="minutes" placeholder="0" value="0"required>
-                    <label>Team: </label> 
-                        <select name="player_team" class="form-control" id="player_team">
-                        {% for row in team_data %}
+                    <label>Player ID</label>
+                        <select name="player" class="form-control" id="player">
+                            {% for row in player_data %}
                             {% for key in row.keys() %}
                                 <option value ={{row[key]}}>{{row[key]}}</option>
                             {% endfor %}
                         {% endfor %}
                         </select>
-                    <label>Injury Status: </label> 
-                        <select name="player_injury" class="form-control" id="player_injury">
-                        {% for row in injury_data %}
+                    <label>Roster ID</label>
+                        <select name="roster" class="form-control" id="roster">
+                            {% for row in roster_data %}
                             {% for key in row.keys() %}
-                                <option value ={{row[key]}} {% if row[key] == "NULL" %} selected {% endif %}>{{row[key]}}</option>
+                                <option value ={{row[key]}}>{{row[key]}}</option>
                             {% endfor %}
                         {% endfor %}
                         </select>
-                    <input class="btn" type="submit" id="addPlayer" name="addPlayer" value="Submit">
+                    <input class="btn" type="submit" id="addRelation" name="addRelation" value="Submit">
                 </fieldset>
                     <input class="btn" type="button" value="Cancel" onClick="readFields()">
             </form>

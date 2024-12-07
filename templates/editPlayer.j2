@@ -12,11 +12,11 @@
         <H1 align="center"><a href="/index">Slam Dunk</a></H1>
         <p align="center" class="global"> |
                 <a href="/users">Users</a> |
-                <a href="#">Rosters</a> |
+                <a href="/rosters">Rosters</a> |
                 <a href="/players">Players</a> |
                 <a href="/teams">Teams</a> |
                 <a href="/injuryStatus">Injury Status</a> |
-                <a href="#">Players-Rosters</a> |
+                <a href="/playersRosters">Players-Rosters</a> |
             </p>
         <section>
             <H2 align="center">Edit Players</H2>
@@ -33,6 +33,7 @@
                         <label>Points: </label> <input type="number" name="player_points" class="form-control" id="points" placeholder="{{player_data[0].point_stat}}" value="{{player_data[0].point_stat}}" required>
                         <label>Assists: </label> <input type="number" name="player_assists" class="form-control" id="assists" placeholder="{{player_data[0].assist_stat}}" value="{{player_data[0].assist_stat}}" required>
                         <label>Rebounds: </label> <input type="number" name="player_rebounds" class="form-control" id="rebounds" placeholder="{{player_data[0].rebound_stat}}" value="{{player_data[0].rebound_stat}}" required>
+                        <p></P>
                         <label>Blocks: </label> <input type="number" name="player_blocks" class="form-control" id="blocks" placeholder="{{player_data[0].block_stat}}" value="{{player_data[0].block_stat}}" required>
                         <label>Steals: </label> <input type="number" name="player_steals" class="form-control" id="steals" placeholder="{{player_data[0].steal_stat}}" value="{{player_data[0].steal_stat}}" required>
                         <label>Minutes: </label> <input type="number" name="player_minutes" class="form-control" id="minutes" placeholder="{{player_data[0].timePlayed_stat}}" value="{{player_data[0].timePlayed_stat}}" required>

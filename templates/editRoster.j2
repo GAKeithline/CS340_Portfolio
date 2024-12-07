@@ -1,0 +1,51 @@
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Slam Dunk- Edit Roster</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' href="{{ url_for('static', filename='dunk.css')}}">
+</head>
+
+    <body>
+    <header>
+        <H1 align="center"><a href="/index">Slam Dunk</a></H1>
+        <p align="center" class="global"> |
+                <a href="/users">Users</a> |
+                <a href="/rosters">Rosters</a> |
+                <a href="/players">Players</a> |
+                <a href="/teams">Teams</a> |
+                <a href="/injuryStatus">Injury Status</a> |
+                <a href="/playersRosters">Players-Rosters</a> |
+            </p>
+        <section>
+            <H2 align="center">Edit Rosters</H2>
+        </section>
+    </header>
+
+    <main>
+        <div id="edit" align="center">
+                <form method="POST" id="editRoster" action="/editRoster/{{roster_data[0].roster_id}}">
+                    <fieldset class="acres">
+                        <input type="hidden" class="form-control" name="roster_id" id="roster_id" value="{{roster_data[0].roster_id}}" required>
+                        <label>Roster ID: </label> {{roster_data[0].roster_id}}
+                        <label>Roster Name: </label> <input type="text" name="roster_name" class="form-control" id="rname" placeholder="{{roster_data[0].roster_name}}" value="{{roster_data[0].roster_name}}" required>
+                        <label>User ID: </label> 
+                            <select name="roster_user" class="form-control" id="roster_user">
+                            {% for row in user_data %}
+                                {% for key in row.keys() %}
+                                    <option value ={{row[key]}} {% if row[key] == roster_data[0].user_id %} selected {% endif %}>{{row[key]}}</option>
+                                {% endfor %}
+                            {% endfor %}
+                            </select>
+                        <input class="btn" type="submit" name = "editRoster" id="editRoster" value="Submit">
+                    </fieldset>
+                        <a href="/rosters">Cancel</a>
+                </form>
+                <p>&nbsp;</p>
+        </div> <!-- edit -->
+        <footer>
+            &copy; 2024 Gilbert Keithline & Sayid Ali
+        </footer>
+    </body>
+</html>

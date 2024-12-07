@@ -237,7 +237,7 @@ def editInjury(id):
 def players():
     # Render the table (Display)
     if request.method == 'GET':
-        query = "SELECT player_id as ID, player_name as 'Player Name', point_stat as Points, assist_stat as Assists, rebound_stat as Rebounds, block_stat as Blocks, steal_stat as Steals, timePlayed_stat as Minutes, team_id as 'Team ID', injury_id as 'Injury Status' FROM Players;"
+        query = "SELECT player_id as ID, player_name as 'Player Name', point_stat as Points, assist_stat as Assists, rebound_stat as Rebounds, block_stat as Blocks, steal_stat as Steals, timePlayed_stat as Minutes, team_id as Team, injury_id as 'Injury Status' FROM Players;"
         cursor = mysql.connection.cursor()
         cursor.execute(query)
         player_data = cursor.fetchall()
@@ -328,6 +328,182 @@ def editPlayer(id):
             mysql.connection.commit()
                 
         return redirect("/players")
+    
+@app.route("/rosters", methods=["POST", "GET"])
+# 'Display' Users table and enable 'Create' functionality
+def rosters():
+    # Render the table (Display)
+    if request.method == 'GET':
+        query = "SELECT roster_id as ID, roster_name as 'Roster Name', user_id as User FROM Rosters;"
+        cursor = mysql.connection.cursor()
+        cursor.execute(query)
+        roster_data = cursor.fetchall()
+
+        query2 = "SELECT user_id FROM Users"
+        cur = mysql.connection.cursor()
+        cur.execute(query2)
+        user_data = cur.fetchall()
+
+        return render_template('rosters.j2', roster_data = roster_data, user_data = user_data)
+    
+    # Add a new user (Create)
+    if request.method == 'POST':
+        if request.form.get("addRoster"):
+            name = request.form["roster_name"]
+            user = request.form["roster_user"]
+
+            query = "INSERT INTO Rosters (roster_name, user_id) VALUES (%s, %s);"
+            cursor = mysql.connection.cursor()
+            cursor.execute(query, (name, user))
+            mysql.connection.commit()
+        
+        return redirect("/rosters")
+    
+@app.route("/removeRoster/<int:id>")
+# 'Remove' a table item
+def removeRoster(id):
+    # Deletes a User (Remove)
+    query = "DELETE FROM Rosters WHERE roster_id = '%s';"
+    cursor = mysql.connection.cursor()
+    cursor.execute(query, (id,))
+    mysql.connection.commit()
+
+    return redirect("/rosters")
+
+@app.route("/editRoster/<int:id>", methods=["POST", "GET"])
+# Enables 'Update' funtionality for User items
+def editRoster(id):
+    # Renders the update template
+    if request.method == "GET":
+        query = 'SELECT * FROM Rosters WHERE roster_id =%s' % (id)
+        cursor = mysql.connection.cursor()
+        cursor.execute(query)
+        roster_data = cursor.fetchall()
+
+        query2 = "SELECT user_id FROM Users"
+        cur = mysql.connection.cursor()
+        cur.execute(query2)
+        user_data = cur.fetchall()
+
+        return render_template("editRoster.j2", roster_data=roster_data, user_data=user_data)
+    
+    # Allows database user to change row information based on user_id selection (Update)
+    if request.method == "POST":
+        if request.form.get("editRoster"):
+            id = request.form["roster_id"]
+            name = request.form["roster_name"]
+            user = request.form["roster_user"]
+
+            query = "UPDATE Rosters SET roster_name = %s, user_id = %s WHERE roster_id = %s;"
+            cursor = mysql.connection.cursor()
+            cursor.execute(query, (name, user, id))
+            mysql.connection.commit()
+                
+        return redirect("/rosters")
+    
+@app.route("/playersRosters", methods=["POST", "GET"])
+# 'Display' Users table and enable 'Create' functionality
+def relations():
+    # Render the table (Display)
+    if request.method == 'GET':
+        query = "SELECT playerRoster_id as ID, player_id as 'Player ID', roster_id as Roster_ID FROM Players_Rosters;"
+        cursor = mysql.connection.cursor()
+        cursor.execute(query)
+        pr_data = cursor.fetchall()
+
+        query2 = "SELECT player_id FROM Players"
+        cur = mysql.connection.cursor()
+        cur.execute(query2)
+        player_data = cur.fetchall()
+
+        query3 = "SELECT roster_id FROM Rosters"
+        cur = mysql.connection.cursor()
+        cur.execute(query3)
+        roster_data = cur.fetchall()
+
+        return render_template('playersRosters.j2', pr_data = pr_data, player_data = player_data, roster_data = roster_data)
+    
+    # Add a new user (Create)
+    if request.method == 'POST':
+        if request.form.get("addRelation"):
+            player = request.form["player"]
+            roster = request.form["roster"]
+
+            query = "INSERT INTO Players_Rosters (player_id, roster_id) VALUES (%s, %s);"
+            cursor = mysql.connection.cursor()
+            cursor.execute(query, (player, roster))
+            mysql.connection.commit()
+        
+        return redirect("/playersRosters")
+    
+@app.route("/removeRelation/<int:id>")
+# 'Remove' a table item
+def removeRelation(id):
+    # Deletes a User (Remove)
+    query = "DELETE FROM Players_Rosters WHERE playerRoster_id = '%s';"
+    cursor = mysql.connection.cursor()
+    cursor.execute(query, (id,))
+    mysql.connection.commit()
+
+    return redirect("/playersRosters")
+
+@app.route("/editRelation/<int:id>", methods=["POST", "GET"])
+# Enables 'Update' funtionality for User items
+def editRelation(id):
+    # Renders the update template
+    if request.method == "GET":
+        query = 'SELECT * FROM Players_Rosters WHERE playerRoster_id =%s' % (id)
+        cursor = mysql.connection.cursor()
+        cursor.execute(query)
+        relation_data = cursor.fetchall()
+
+        query2 = "SELECT player_id FROM Players"
+        cur = mysql.connection.cursor()
+        cur.execute(query2)
+        player_data = cur.fetchall()
+
+        query3 = "SELECT roster_id FROM Rosters"
+        cur = mysql.connection.cursor()
+        cur.execute(query3)
+        roster_data = cur.fetchall()
+
+        return render_template("editPlayerRoster.j2", relation_data = relation_data, player_data = player_data, roster_data=roster_data)
+    
+    # Allows database user to change row information based on user_id selection (Update)
+    if request.method == "POST":
+        if request.form.get("editRelation"):
+            id = request.form["pr_id"]
+            player = request.form["player"]
+            roster = request.form["roster"]
+
+            query = "UPDATE Players_Rosters SET player_id = %s, roster_id = %s WHERE playerRoster_id = %s;"
+            cursor = mysql.connection.cursor()
+            cursor.execute(query, (player, roster, id))
+            mysql.connection.commit()
+                
+        return redirect("/playersRosters")
+    
+@app.route("/viewRoster/<int:id>")
+# 'Remove' a table item
+def viewRoster(id):
+    # Deletes a User (Remove)
+    query = "SELECT Players_Rosters.roster_id as ID, Rosters.roster_name as 'Roster Name', Players.player_name as Player, Players.team_id as Team FROM Players JOIN Players_Rosters ON Players.player_id = Players_Rosters.player_id JOIN Rosters ON Players_Rosters.roster_id = Rosters.roster_id WHERE Rosters.roster_id = %s;" % (id)
+    cursor = mysql.connection.cursor()
+    cursor.execute(query)
+    roster_data = cursor.fetchall()
+
+    return render_template("viewRoster.j2", roster_data = roster_data)
+
+@app.route("/viewTeam/<int:id>")  # BEING DEVELOPED
+# 'Remove' a table item
+def viewTeam(id):
+    # Deletes a User (Remove)
+    query = "SELECT Teams.team_id as ID, Teams.team_name as 'Team Name', Players.player_name as Player, Rosters.roster_id as Roster FROM Players JOIN Teams ON Players.team_id = Teams.team_id JOIN Players_Rosters ON Players.player_id = Players_Rosters.player_id WHERE Teams.team_id = %s;" % (id)
+    cursor = mysql.connection.cursor()
+    cursor.execute(query)
+    team_data = cursor.fetchall()
+
+    return render_template("viewTeam.j2", team_data = team_data)
 
 
 # Listener

@@ -2,7 +2,7 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Slam Dunk- Injury Status</title>
+    <title>Slam Dunk- Players</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' href="{{ url_for('static', filename='dunk.css')}}">
     <script language="JavaScript">
@@ -48,42 +48,37 @@
 
 <body onload="readFields()">
     <header>
-        <H1 align="center"><a href="index">Slam Dunk</a></H1>
+        <H1 align="center"><a href="/index">Slam Dunk</a></H1>
         <p align="center" class="global"> |
-                <a href="users">Users</a> |
-                <a href="rosters">Rosters</a> |
-                <a href="players">Players</a> |
-                <a href="teams">Teams</a> |
-                <a href="injuryStatus">Injury Status</a> |
-                <a href="playersRosters">Players-Rosters</a> |
+                <a href="/users">Users</a> |
+                <a href="/rosters">Rosters</a> |
+                <a href="/players">Players</a> |
+                <a href="/teams">Teams</a> |
+                <a href="/injuryStatus">Injury Status</a> |
+                <a href="/playersRosters">Players-Rosters</a> |
             </p>
         <section>
-            <H2 align="center">Injury Status</H2>
-            <p align="center"><a href="#" onClick="addField()">Add Status</a></p>
+            <H2 align="center">View Team</H2>
         </section>
     </header>
 
     <main>
         <div id="read">
             <table align="center">
-                {% if injury_data %}
+                {% if team_data %}
                     <thead>
                         <tr align="left" border-bottom="3px solid black">
-                            {% for key in injury_data[0].keys() %}
+                            {% for key in team_data[0].keys() %}
                             <th scope='col' data-field='{{ key }}' data-filter-control='input'>{{ key }}</th>
                             {% endfor %}
-                            <th></th>
-                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        {% for row in injury_data %}
+                        {% for row in team_data %}
                             <tr>
                                 {% for key in row.keys() %}
                                 <td> {{row[key]}} </td>
                                 {% endfor %}
-                                <td><a href="editInjury/{{row.ID}}">Update</a></td>
-                                <td><a href="removeInjury/{{row.ID}}">Remove</a> </td>
                             </tr>
                         {% endfor %}
                     </tbody>
@@ -91,19 +86,6 @@
             </table>
         <p>&nbsp;</p>
         </div> <!-- read -->
-
-        <div id="add" align="center">
-            <form method="POST" id="addInjury" action="/injuryStatus">
-                <legend><strong>Add Status</strong></legend>
-                <fieldset class="acres">
-                    <label>Injury Tag: </label> <input type="text" name="injury_tag" class="form-control" id="itag" placeholder="Tag" required>
-                    <label>Injury Description: </label> <textarea name="injury_description" class="form-control" id="idesc" placeholder="Description" required></textarea>
-                    <input class="btn" type="submit" id="addInjury" name="addInjury" value="Submit">
-                </fieldset>
-                    <input class="btn" type="button" value="Cancel" onClick="readFields()">
-            </form>
-            <p>&nbsp;</p>
-        </div> <!-- add -->
 
 
     </main>
