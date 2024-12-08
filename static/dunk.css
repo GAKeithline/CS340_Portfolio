@@ -21,8 +21,7 @@ header {
     text-align:left;
     border-bottom:3px solid black;
   }
-  tbody {}
-  tfoot {}
+
   tr td{
     border-bottom:2px dashed;
     /* min-width:100px; */
