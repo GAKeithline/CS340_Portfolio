@@ -41,20 +41,4 @@ header {
   body{
 
     background-color:var(--dunkBlack);
-    color:var(--whitesmoke);
-  }
-
-  a:link {
-    color:burlywood;
-  }
-  a:visited {
-    color:chocolate;
-  }
-
-  .global a {
-    border-radius:5px 5px 5px 5px;
-    font-size:1.2em;
-    font-weight:bold;
-    padding: 2px 5px 2px 5px;
-    text-decoration:none;
-  }
+    color:var(--whitesmoke)
