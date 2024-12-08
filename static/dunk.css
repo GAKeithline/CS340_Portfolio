@@ -58,3 +58,32 @@ header {
     padding: 2px 5px 2px 5px;
     text-decoration:none;
   }
+
+  /* General Button Style */
+.btn {
+  display: inline-block; /* Makes the link behave like a button */
+  background-color: #a7c3e0; /* Button background color */
+  color: black; /* Text color */
+  padding: 10px 20px; /* Space inside the button */
+  font-size: 1rem; /* Button font size */
+  font-weight: bold; /* Bold text */
+  text-align: center; /* Center text */
+  text-decoration: none; /* Remove underline */
+  border: none; /* Remove border */
+  border-radius: 5px; /* Rounded corners */
+  margin: 10px; /* Adds spacing */
+  transition: transform 0.2s, background-color 0.2s; /* Smooth hover effects */
+}
+
+/* Hover Effect */
+.btn:hover {
+  background-color: rgb(47, 138, 223) ; /* Darker shade of blue */
+  transform: scale(1.1); /* Makes the button 10% bigger */
+  cursor: pointer; /* Change cursor to pointer */
+}
+
+/* Active/Pressed Effect */
+.btn:active {
+  transform: scale(1.05); /* Slightly smaller than hover */
+  background-color: #004080; /* Even darker shade */
+}
