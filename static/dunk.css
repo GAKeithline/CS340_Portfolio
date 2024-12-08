@@ -59,85 +59,86 @@ header {
     text-decoration:none;
   }
 
-  .btn {
-    display: inline-block; /* Makes the link behave like a button */
-    background-color: #a7c3e0; /* Button background color */
-    color: black; /* Text color */
-    padding: 10px 20px; /* Space inside the button */
-    font-size: 1rem; /* Button font size */
-    font-weight: bold; /* Bold text */
-    text-align: center; /* Center text */
-    text-decoration: none; /* Remove underline */
-    border: none; /* Remove border */
-    border-radius: 5px; /* Rounded corners */
-    margin: 10px; /* Adds spacing */
-    transition: transform 0.2s, background-color 0.2s; /* Smooth hover effects */
-  }
-  
-  /* Hover Effect */
-  .btn:hover {
-    background-color: rgb(47, 138, 223) ; /* Darker shade of blue */
-    transform: scale(1.1); /* Makes the button 10% bigger */
-    cursor: pointer; /* Change cursor to pointer */
-  }
-  
-  /* Active/Pressed Effect */
-  .btn:active {
-    transform: scale(1.05); /* Slightly smaller than hover */
-    background-color: #004080; /* Even darker shade */
-  }
-  
-  /* Navigation Bar Styling */
-  .basketball-nav {
-    display: flex; /* Arrange buttons horizontally */
-    justify-content: center; /* Center the buttons */
-    gap: 15px; /* Add space between basketballs */
-    margin: 20px 0; /* Space around the nav bar */
-  }
-  
-  /* Basketball Button Style */
-  .basketball-btn {
-    display: inline-block;
-    width: 80px; /* Set basketball size */
-    height: 80px;
-    background-color: #f79c6c; /* Basketball orange color */
-    border-radius: 50%; /* Makes it a circle */
-    color: white; /* Text color */
-    font-weight: bold;
-    text-align: center;
-    line-height: 80px; /* Center text vertically */
-    text-decoration: none; /* Remove underline */
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Add slight shadow for depth */
-    position: relative; /* Needed for pseudo-elements */
-    transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s; /* Smooth effects */
-  }
-  
-  /* Add Basketball Lines */
-  .basketball-btn::before, .basketball-btn::after {
-    content: '';
-    position: absolute;
-    width: 60%; /* Horizontal/vertical line width */
-    height: 4px; /* Line thickness */
-    background-color: black; /* Line color */
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) rotate(0deg); /* Horizontal line */
-    border-radius: 10px; /* Rounded edges */
-  }
-  .basketball-btn::after {
-    transform: translate(-50%, -50%) rotate(90deg); /* Vertical line */
-  }
-  
-  /* Hover Effect */
-  .basketball-btn:hover {
-    background-color: #ff7f50; /* Slightly lighter orange on hover */
-    transform: scale(1.1); /* Grow slightly */
-    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.4); /* Enhance shadow on hover */
-    cursor: pointer; /* Show hand cursor */
-  }
-  
-  /* Active/Pressed Effect */
-  .basketball-btn:active {
-    background-color: #e66a2e; /* Darker orange */
-    transform: scale(1.05); /* Slightly smaller than hover */
-  }
+  /* General Button Style */
+.btn {
+  display: inline-block; /* Makes the link behave like a button */
+  background-color: #a7c3e0; /* Button background color */
+  color: black; /* Text color */
+  padding: 10px 20px; /* Space inside the button */
+  font-size: 1rem; /* Button font size */
+  font-weight: bold; /* Bold text */
+  text-align: center; /* Center text */
+  text-decoration: none; /* Remove underline */
+  border: none; /* Remove border */
+  border-radius: 5px; /* Rounded corners */
+  margin: 10px; /* Adds spacing */
+  transition: transform 0.2s, background-color 0.2s; /* Smooth hover effects */
+}
+
+/* Hover Effect */
+.btn:hover {
+  background-color: rgb(47, 138, 223) ; /* Darker shade of blue */
+  transform: scale(1.1); /* Makes the button 10% bigger */
+  cursor: pointer; /* Change cursor to pointer */
+}
+
+/* Active/Pressed Effect */
+.btn:active {
+  transform: scale(1.05); /* Slightly smaller than hover */
+  background-color: #004080; /* Even darker shade */
+}
+
+/* Navigation Bar Styling */
+.basketball-nav {
+  display: flex; /* Arrange buttons horizontally */
+  justify-content: center; /* Center the buttons */
+  gap: 15px; /* Add space between basketballs */
+  margin: 20px 0; /* Space around the nav bar */
+}
+
+/* Basketball Button Style */
+.basketball-btn {
+  display: inline-block;
+  width: 80px; /* Set basketball size */
+  height: 80px;
+  background-color: #f79c6c; /* Basketball orange color */
+  border-radius: 50%; /* Makes it a circle */
+  color: white; /* Text color */
+  font-weight: bold;
+  text-align: center;
+  line-height: 80px; /* Center text vertically */
+  text-decoration: none; /* Remove underline */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Add slight shadow for depth */
+  position: relative; /* Needed for pseudo-elements */
+  transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s; /* Smooth effects */
+}
+
+/* Add Basketball Lines */
+.basketball-btn::before, .basketball-btn::after {
+  content: '';
+  position: absolute;
+  width: 60%; /* Horizontal/vertical line width */
+  height: 4px; /* Line thickness */
+  background-color: black; /* Line color */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(0deg); /* Horizontal line */
+  border-radius: 10px; /* Rounded edges */
+}
+.basketball-btn::after {
+  transform: translate(-50%, -50%) rotate(90deg); /* Vertical line */
+}
+
+/* Hover Effect */
+.basketball-btn:hover {
+  background-color: #ff7f50; /* Slightly lighter orange on hover */
+  transform: scale(1.1); /* Grow slightly */
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.4); /* Enhance shadow on hover */
+  cursor: pointer; /* Show hand cursor */
+}
+
+/* Active/Pressed Effect */
+.basketball-btn:active {
+  background-color: #e66a2e; /* Darker orange */
+  transform: scale(1.05); /* Slightly smaller than hover */
+}
