@@ -48,7 +48,7 @@
 
 <body onload="readFields()">
     <header>
-        <H1 align="center"><a href="index">Slam Dunk</a></H1>
+        <H1 align="center"><a href="index" class="home">Slam Dunk</a></H1>
         <nav align="center" class="basketball-nav">
             <a href="users" class="basketball-btn">Users</a>
             <a href="rosters" class="basketball-btn">Rosters</a>
@@ -59,7 +59,9 @@
         </nav>
         <section>
             <H2 align="center">Teams</H2>
-            <p align="center"><a href="#" onClick="addField()" class="btn">Add Team</a></p>
+            <div class="action-container">
+                <button onClick="addField()" class="btn action-btn">Add Team</button>
+            </div>
         </section>
     </header>
 
@@ -74,6 +76,7 @@
                             {% endfor %}
                             <th></th>
                             <th></th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -82,9 +85,9 @@
                                 {% for key in row.keys() %}
                                 <td> {{row[key]}} </td>
                                 {% endfor %}
-                                <td><a href="editTeam/{{row.ID}}">Update</a></td>
-                                <td><a href="removeTeam/{{row.ID}}">Remove</a> </td>
-                                <td><a href="viewTeam/{{row.ID}}">View Team</a> </td>
+                                <td><a href="viewTeam/{{row.ID}}"><button>View Team</button></a></td>
+                                <td><a href="editTeam/{{row.ID}}"><button>Update</button></a></td>
+                                <td><a href="removeTeam/{{row.ID}}"><button>Remove</button></a> </td>
                             </tr>
                         {% endfor %}
                     </tbody>

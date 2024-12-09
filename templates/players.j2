@@ -48,7 +48,7 @@
 
 <body onload="readFields()">
     <header class="main-header">
-        <h1 class="page-title"><a href="index">Slam Dunk</a></h1>
+        <h1 class="page-title"><a href="index" class="home">Slam Dunk</a></h1>
         <nav class="basketball-nav">
             <a href="users" class="basketball-btn">Users</a>
             <a href="rosters" class="basketball-btn">Rosters</a>
@@ -84,8 +84,8 @@
                                 {% for key in row.keys() %}
                                 <td> {{row[key]}} </td>
                                 {% endfor %}
-                                <td><a href="editPlayer/{{row.ID}}">Update</a></td>
-                                <td><a href="removePlayer/{{row.ID}}">Remove</a> </td>
+                                <td><a href="editPlayer/{{row.ID}}"><button>Update</button></a></td>
+                                <td><a href="removePlayer/{{row.ID}}"><button>Remove</button></a> </td>
                             </tr>
                         {% endfor %}
                     </tbody>

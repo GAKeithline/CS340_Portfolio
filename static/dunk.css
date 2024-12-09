@@ -66,7 +66,9 @@ tr td {
   display: inline-block;
   width: 100px; /* Set basketball size */
   height: 100px;
-  background-color: #e66a2e; /* Darker basketball orange */
+  /*background-color: #e66a2e;  Darker basketball orange */
+  background-image: url(Basketball.jpg);
+  background-position: center;
   border-radius: 50%; /* Makes it a circle */
   color: white; /* Text color */
   font-size: 1rem; /* Text size */
@@ -76,6 +78,46 @@ tr td {
   text-shadow: 1px 1px 2px black; /* Add shadow for better contrast */
   text-decoration: none; /* Remove underline */
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Add slight shadow for depth */
+  position: relative; /* Needed for pseudo-elements */
+  transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s; /* Smooth effects */
+}
+
+.basketball-btn:link {
+  display: inline-block;
+  width: 100px; /* Set basketball size */
+  height: 100px;
+  /*background-color: #e66a2e;  Darker basketball orange */
+  background-image: url(Basketball.jpg);
+  background-position: center;
+  border-radius: 50%; /* Makes it a circle */
+  color:whitesmoke; /* Text color */
+  font-size: 1rem; /* Text size */
+  /*font-weight:bold;*/
+  text-align: center;
+  line-height: 100px; /* Center text vertically */
+  /*text-shadow: 1px 1px 2px whitesmoke; Add shadow for better contrast */
+  text-decoration: none; /* Remove underline */
+  /*box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);  Add slight shadow for depth */
+  position: relative; /* Needed for pseudo-elements */
+  transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s; /* Smooth effects */
+}
+
+.basketball-btn:visited {
+  display: inline-block;
+  width: 100px; /* Set basketball size */
+  height: 100px;
+  /*background-color: #e66a2e;  Darker basketball orange */
+  background-image: url(Basketball.jpg);
+  background-position: center;
+  border-radius: 50%; /* Makes it a circle */
+  color:darkgray; /* Text color */
+  font-size: 1rem; /* Text size */
+  /*font-weight:bold;*/
+  text-align: center;
+  line-height: 100px; /* Center text vertically */
+  /*text-shadow: 1px 1px 2px whitesmoke; Add shadow for better contrast */
+  text-decoration: none; /* Remove underline */
+  /*box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);  Add slight shadow for depth */
   position: relative; /* Needed for pseudo-elements */
   transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s; /* Smooth effects */
 }
@@ -92,7 +134,6 @@ tr td {
   width: 100px; /* Ensure circle width is preserved */
 }
 
-
 .basketball-btn:hover {
   background-color: #d45518; /* Slightly darker orange on hover */
   transform: scale(1.1); /* Grow slightly */
@@ -104,9 +145,16 @@ tr td {
   transform: scale(1.05); /* Slightly smaller than hover */
 }
 
-
 a:link {
   color: burlywood;
+}
+
+.home:link {
+  color:whitesmoke;
+}
+
+.home:visited {
+color:darkgrey;
 }
 
 a:visited {

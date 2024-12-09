@@ -48,7 +48,7 @@
 
 <body onload="readFields()">
     <header>
-        <H1 align="center"><a href="index">Slam Dunk</a></H1>
+        <H1 align="center"><a href="index" class="home">Slam Dunk</a></H1>
         <nav align="center" class="basketball-nav">
                 <a href="users" class="basketball-btn">Users</a>
                 <a href="rosters" class="basketball-btn">Rosters</a>
@@ -59,7 +59,9 @@
             </nav>
         <section>
             <H2 align="center">Injury Status</H2>
-            <p align="center"><a href="#" onClick="addField()" class="btn">Add Status</a></p>
+            <div class="action-container">
+                <button onClick="addField()" class="btn action-btn">Add Status</button>
+            </div>
         </section>
     </header>
 
@@ -82,8 +84,8 @@
                                 {% for key in row.keys() %}
                                 <td> {{row[key]}} </td>
                                 {% endfor %}
-                                <td><a href="editInjury/{{row.ID}}">Update</a></td>
-                                <td><a href="removeInjury/{{row.ID}}">Remove</a> </td>
+                                <td><a href="editInjury/{{row.ID}}"><button>Update</button></a></td>
+                                <td><a href="removeInjury/{{row.ID}}"><button>Remove</button></a> </td>
                             </tr>
                         {% endfor %}
                     </tbody>
