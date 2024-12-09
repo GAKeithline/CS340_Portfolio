@@ -96,7 +96,8 @@ INSERT INTO Injury_Status (injury_tag, injury_description) VALUES
 ('QUES', 'Questionable: Player is day to day. Likely to play, but may sit out.'),
 ('DOUBT', 'Doubtful: Player is unlikely to play, possibly could.'),
 ('OUT', 'Out: Player is not playing this week.'),
-('IR', 'Injured Reserve: Player is dealing with a major injury and will miss significant time.');
+('IR', 'Injured Reserve: Player is dealing with a major injury and will miss significant time.'),
+('NULL', 'Player is healthy.');
 
 
 -- Insert data into Users Table

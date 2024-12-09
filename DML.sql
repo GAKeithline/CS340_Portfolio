@@ -5,7 +5,7 @@
 -- Users
 
 -- Retrieve Users (user_id, user_name, user_email)
-SELECT user_id, user_name, user_email, user_password
+SELECT user_id as ID, user_name as Name, user_email as 'Email Address', user_password as Password
 FROM Users;
 
 -- Insert new User
@@ -28,7 +28,7 @@ WHERE user_id = :userIDInput;
 
 
 -- Retrieve Teams (team_id, team_name, team_win, team_loss)
-SELECT team_id, team_name, team_win, team_loss 
+SELECT team_id as ID, team_name as 'Team Name', team_win as Wins, team_loss as Losses
 FROM Teams;
 
 -- Insert new Team
@@ -48,18 +48,16 @@ WHERE team_id = :teamIDInput;
 
 -- Filter players by team
 -- Will be activated by clicking the team name, which will be an HTML button
-SELECT Teams.team_id, Teams.team_name, Players.player_name, 
-        Players.point_stat, Players.assist_stat, Players.rebound_stat, 
-        Players.block_stat, Players.steal_stat, Players.timePlayed_stat, 
-        Players.injury_id, Players_Rosters.roster_id FROM Players
+SELECT Teams.team_id as ID, Teams.team_name as 'Team Name', Players.player_name as Player, 
+FROM Players
 JOIN Teams ON Players.team_id = Teams.team_id
-JOIN Players_Rosters ON Players.player_id = Players_Rosters.player_id
-WHERE Teams.team_name = :teamNameSelection;
+WHERE Teams.team_id = :teamIDSelection;
 
 -- Players
 
 -- Retrieve Players (player_id, player_name, stats)
-SELECT player_id, player_name, point_stat, assist_stat, rebound_stat, block_stat, steal_stat, timePlayed_stat, team_id, injury_tag 
+SELECT player_id as ID, player_name as 'Player Name', point_stat as Points, assist_stat as Assists, 
+        rebound_stat as Rebounds, block_stat as Blocks, steal_stat as Steals, timePlayed_stat as Minutes, team_id as Team, injury_tag as 'Injury Status'
 FROM Players;
 
 -- Sort Players descending by stat
@@ -94,7 +92,7 @@ WHERE player_id = :playerIDInput;
 -- Rosters
 
 -- Retrieve Rosters (roster_id, roster_name, user_id)
-SELECT roster_id, roster_name, user_id 
+SELECT roster_id as ID, roster_name as 'Roster Name', user_id as User
 FROM Rosters;
 
 -- Insert new Roster for a User
@@ -113,10 +111,8 @@ WHERE roster_id = :rosterIDInput;
 
 -- Filter Players by Roster
 -- Will be activated by clicking the roster name, which will be an HTML button
-SELECT Players_Rosters.roster_id, Rosters.roster_name, Players.player_name, 
-        Players.point_stat, Players.assist_stat, Players.rebound_stat, 
-        Players.block_stat, Players.steal_stat, Players.timePlayed_stat, 
-        Players.team_id, Players.injury_id FROM Players
+SELECT Players_Rosters.roster_id as ID, Rosters.roster_name as 'Roster name', Players.player_name as Player, 
+FROM Players
 JOIN Players_Rosters ON Players.player_id = Players_Rosters.player_id
 JOIN Rosters ON Players_Rosters.roster_id = Rosters.roster_id
 WHERE Rosters.roster_name = :rosterNameSelection;
@@ -137,7 +133,7 @@ WHERE player_id = :playerIDInput AND roster_id = :rosterIDInput;
 -- Injury_Status
 
 -- Retrieve Injury Statuses (injury_id, injury_description)
-SELECT injury_tag, injury_description 
+SELECT injury_id as ID, injury_tag as Tag, injury_description as 'Status Description' 
 FROM Injury_Status;
 
 -- Insert new Injury Status
@@ -146,7 +142,7 @@ VALUES (:injuryIDInput, :injuryNameInput);
 
 -- Update an Injury Status description
 UPDATE Injury_Status 
-SET injury_description = :injuryDescriptionInput
+SET injury_tag = :injuryTagInput, injury_description = :injuryDescriptionInput
 WHERE injury_id = :injuryIDInput;
 
 -- Delete an Injury Status
