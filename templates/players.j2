@@ -47,19 +47,21 @@
 </head>
 
 <body onload="readFields()">
-    <header>
-        <H1 align="center"><a href="index">Slam Dunk</a></H1>
-        <nav align="center" class="basketball-nav">
-                <a href="users" class="basketball-btn">Users</a>
-                <a href="rosters" class="basketball-btn">Rosters</a>
-                <a href="players" class="basketball-btn">Players</a>
-                <a href="teams" class="basketball-btn">Teams</a>
-                <a href="injuryStatus" class="basketball-btn">Injury Status</a>
-                <a href="playersRosters" class="basketball-btn">Players-Rosters</a>
-            </nav>
-        <section>
-            <H2 align="center">Players</H2>
-            <p align="center"><a href="#" onClick="addField()" class="btn">Add Player</a></p>
+    <header class="main-header">
+        <h1 class="page-title"><a href="index">Slam Dunk</a></h1>
+        <nav class="basketball-nav">
+            <a href="users" class="basketball-btn">Users</a>
+            <a href="rosters" class="basketball-btn">Rosters</a>
+            <a href="players" class="basketball-btn">Players</a>
+            <a href="teams" class="basketball-btn">Teams</a>
+            <a href="injuryStatus" class="basketball-btn">Injury Status</a>
+            <a href="playersRosters" class="basketball-btn multi-line">Players-Rosters</a>
+        </nav>
+        <section class="page-section">
+            <h2 class="section-title">Players</h2>
+            <div class="action-container">
+                <button onClick="addField()" class="btn action-btn">Add Player</button>
+            </div>
         </section>
     </header>
 
