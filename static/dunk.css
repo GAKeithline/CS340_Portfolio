@@ -1,143 +1,119 @@
 :root {
-  --dunkBlack:#1e1e1e;
-  --whitesmoke:#F5F5F5;
+  --dunkBlack: #1e1e1e;
+  --whitesmoke: #F5F5F5;
+}
+
+body {
+  background: url('basketball_court_2.jpg') no-repeat center center fixed;
+  background-size: cover;
+  color: var(--whitesmoke);
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+ 
 }
 
 header {
-    text-align:center;
-  }
-
-  table {
-    max-width:700px;
-    margin-left:auto;
-    margin-right:auto;
-  }
-  caption {
-    padding:1% 0;
-    font-weight:bold
-  }
-  th {
-    height:40px;
-    text-align:left;
-    border-bottom:3px solid black;
-  }
-
-  tr td{
-    border-bottom:2px dashed;
-    /* min-width:100px; */
-    padding:1%;
-    width:0.1%;
-  }
-
-  #intro {
-    text-align: center;
-  }
-
-  .fieldBar {
-    text-align: center;
-  }
-
-  body{
-
-    background-color:var(--dunkBlack);
-    color:var(--whitesmoke);
-  }
-
-  a:link {
-    color:burlywood;
-  }
-  a:visited {
-    color:chocolate;
-  }
-
-  .global a {
-    border-radius:5px 5px 5px 5px;
-    font-size:1.2em;
-    font-weight:bold;
-    padding: 2px 5px 2px 5px;
-    text-decoration:none;
-  }
-
-  /* General Button Style */
-.btn {
-  display: inline-block; /* Makes the link behave like a button */
-  background-color: #a7c3e0; /* Button background color */
-  color: black; /* Text color */
-  padding: 10px 20px; /* Space inside the button */
-  font-size: 1rem; /* Button font size */
-  font-weight: bold; /* Bold text */
-  text-align: center; /* Center text */
-  text-decoration: none; /* Remove underline */
-  border: none; /* Remove border */
-  border-radius: 5px; /* Rounded corners */
-  margin: 10px; /* Adds spacing */
-  transition: transform 0.2s, background-color 0.2s; /* Smooth hover effects */
+  text-align: center;
+  margin-bottom: 30px;
 }
 
-/* Hover Effect */
-.btn:hover {
-  background-color: rgb(47, 138, 223) ; /* Darker shade of blue */
-  transform: scale(1.1); /* Makes the button 10% bigger */
-  cursor: pointer; /* Change cursor to pointer */
+.title {
+  font-size: 3rem;
+  color: orange;
+  text-shadow: 2px 2px 4px black;
 }
 
-/* Active/Pressed Effect */
-.btn:active {
-  transform: scale(1.05); /* Slightly smaller than hover */
-  background-color: #004080; /* Even darker shade */
+table {
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-/* Navigation Bar Styling */
+caption {
+  padding: 1% 0;
+  font-weight: bold;
+}
+
+th {
+  height: 40px;
+  text-align: left;
+  border-bottom: 3px solid black;
+}
+
+tr td {
+  border-bottom: 2px dashed;
+  padding: 1%;
+  width: 0.1%;
+}
+
+#intro {
+  text-align: center;
+  margin-top: 20px;
+}
+
 .basketball-nav {
-  display: flex; /* Arrange buttons horizontally */
-  justify-content: center; /* Center the buttons */
-  gap: 15px; /* Add space between basketballs */
-  margin: 20px 0; /* Space around the nav bar */
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px 0;
 }
 
-/* Basketball Button Style */
 .basketball-btn {
   display: inline-block;
-  width: 80px; /* Set basketball size */
-  height: 80px;
-  background-color: #f79c6c; /* Basketball orange color */
+  width: 100px; /* Set basketball size */
+  height: 100px;
+  background-color: #e66a2e; /* Darker basketball orange */
   border-radius: 50%; /* Makes it a circle */
   color: white; /* Text color */
+  font-size: 1rem; /* Text size */
   font-weight: bold;
   text-align: center;
-  line-height: 80px; /* Center text vertically */
+  line-height: 100px; /* Center text vertically */
+  text-shadow: 1px 1px 2px black; /* Add shadow for better contrast */
   text-decoration: none; /* Remove underline */
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Add slight shadow for depth */
   position: relative; /* Needed for pseudo-elements */
   transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s; /* Smooth effects */
 }
 
-/* Add Basketball Lines */
-.basketball-btn::before, .basketball-btn::after {
-  content: '';
-  position: absolute;
-  width: 60%; /* Horizontal/vertical line width */
-  height: 4px; /* Line thickness */
-  background-color: black; /* Line color */
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) rotate(0deg); /* Horizontal line */
-  border-radius: 10px; /* Rounded edges */
-}
-.basketball-btn::after {
-  transform: translate(-50%, -50%) rotate(90deg); /* Vertical line */
+.basketball-btn.multi-line {
+  font-size: 0.9rem; /* Slightly smaller font for better fit */
+  line-height: normal; /* Reset line height */
+  padding: 0; /* Remove padding */
+  display: flex; /* Use flexbox for centering */
+  align-items: center; /* Center vertically */
+  justify-content: center; /* Center horizontally */
+  text-align: center; /* Center multi-line text */
+  height: 100px; /* Ensure circle height is preserved */
+  width: 100px; /* Ensure circle width is preserved */
 }
 
-/* Hover Effect */
+
 .basketball-btn:hover {
-  background-color: #ff7f50; /* Slightly lighter orange on hover */
+  background-color: #d45518; /* Slightly darker orange on hover */
   transform: scale(1.1); /* Grow slightly */
   box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.4); /* Enhance shadow on hover */
-  cursor: pointer; /* Show hand cursor */
 }
 
-/* Active/Pressed Effect */
 .basketball-btn:active {
-  background-color: #e66a2e; /* Darker orange */
+  background-color: #b7410e; /* Even darker orange */
   transform: scale(1.05); /* Slightly smaller than hover */
+}
+
+
+a:link {
+  color: burlywood;
+}
+
+a:visited {
+  color: chocolate;
+}
+
+.global a {
+  border-radius: 5px 5px 5px 5px;
+  font-size: 1.2em;
+  font-weight: bold;
+  padding: 2px 5px 2px 5px;
+  text-decoration: none;
 }
