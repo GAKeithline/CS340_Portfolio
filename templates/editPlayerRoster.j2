@@ -45,19 +45,15 @@
                         <label>Relation ID: </label> {{relation_data[0].playerRoster_id}}
                         <label>Player ID: </label> 
                             <select name="player" class="form-control" id="player">
-                            {% for row in player_data %}
-                                {% for key in row.keys() %}
-                                    <option value ={{row[key]}} {% if row[key] == relation_data[0].player_id %} selected {% endif %}>{{row[key]}}</option>
+                                {% for key in playerKeyList %}
+                                    <option value ={{key}} {% if key == relation_data[0].player_id %} selected {% endif %}>{{key}}</option>
                                 {% endfor %}
-                            {% endfor %}
                             </select>
                         <label>Roster ID</label>
                             <select name="roster" class="form-control" id="roster">
-                            {% for row in roster_data %}
-                                {% for key in row.keys() %}
-                                    <option value ={{row[key]}} {% if row[key] == relation_data[0].roster_id %} selected {% endif %}>{{row[key]}}</option>
+                                {% for key in rosterKeyList %}
+                                    <option value ={{key}} {% if key == relation_data[0].roster_id %} selected {% endif %}>{{key}}</option>
                                 {% endfor %}
-                            {% endfor %}
                             </select>
                         <input class="btn" type="submit" name = "editRelation" id="editRelation" value="Submit">
                     </fieldset>

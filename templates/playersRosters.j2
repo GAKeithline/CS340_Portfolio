@@ -100,18 +100,14 @@
                 <fieldset class="acres">
                     <label>Player ID</label>
                         <select name="player" class="form-control" id="player">
-                            {% for row in player_data %}
-                            {% for key in row.keys() %}
-                                <option value ={{row[key]}}>{{row[key]}}</option>
-                            {% endfor %}
+                            {% for key in playerKeyList %}
+                                <option value ={{key}}>{{key}}</option>
                         {% endfor %}
                         </select>
                     <label>Roster ID</label>
                         <select name="roster" class="form-control" id="roster">
-                            {% for row in roster_data %}
-                            {% for key in row.keys() %}
-                                <option value ={{row[key]}}>{{row[key]}}</option>
-                            {% endfor %}
+                            {% for key in rosterKeyList %}
+                                <option value ={{key}}>{{key}}</option>
                         {% endfor %}
                         </select>
                     <input class="btn" type="submit" id="addRelation" name="addRelation" value="Submit">

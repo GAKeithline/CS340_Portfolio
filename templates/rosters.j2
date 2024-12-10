@@ -102,11 +102,9 @@
                     <label>Roster Name: </label> <input type="text" name="roster_name" class="form-control" id="rname" placeholder="Roster Name" required>
                     <label>User ID: </label>
                         <select name="roster_user" class="form-control" id="roster_user">
-                            {% for row in user_data %}
-                            {% for key in row.keys() %}
-                                <option value ={{row[key]}}>{{row[key]}}</option>
+                            {% for key in userKeyList %}
+                                <option value ={{key}}>{{key}}</option>
                             {% endfor %}
-                        {% endfor %}
                         </select>
                     <input class="btn" type="submit" id="addRoster" name="addRoster" value="Submit">
                 </fieldset>

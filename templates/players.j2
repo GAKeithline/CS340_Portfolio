@@ -107,18 +107,14 @@
                     <label>Minutes: </label> <input type="number" name="player_minutes" class="form-control" id="minutes" placeholder="0" value="0">
                     <label>Team: </label> 
                         <select name="player_team" class="form-control" id="player_team">
-                        {% for row in team_data %}
-                            {% for key in row.keys() %}
-                                <option value ={{row[key]}}>{{row[key]}}</option>
-                            {% endfor %}
+                            {% for key in teamKeyList %}
+                                <option value ={{key}}>{{key}}</option>
                         {% endfor %}
                         </select>
                     <label>Injury Status: </label> 
                         <select name="player_injury" class="form-control" id="player_injury">
-                        {% for row in injury_data %}
-                            {% for key in row.keys() %}
-                                <option value ={{row[key]}} {% if row[key] == "NULL" %} selected {% endif %}>{{row[key]}}</option>
-                            {% endfor %}
+                            {% for key in injKeyList %}
+                                <option value ={{key}} {% if key == "NULL" %} selected {% endif %}>{{key}}</option>
                         {% endfor %}
                         </select>
                     <input class="btn" type="submit" id="addPlayer" name="addPlayer" value="Submit">

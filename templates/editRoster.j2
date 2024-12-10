@@ -46,10 +46,8 @@
                         <label>Roster Name: </label> <input type="text" name="roster_name" class="form-control" id="rname" placeholder="{{roster_data[0].roster_name}}" value="{{roster_data[0].roster_name}}" required>
                         <label>User ID: </label> 
                             <select name="roster_user" class="form-control" id="roster_user">
-                            {% for row in user_data %}
-                                {% for key in row.keys() %}
-                                    <option value ={{row[key]}} {% if row[key] == roster_data[0].user_id %} selected {% endif %}>{{row[key]}}</option>
-                                {% endfor %}
+                            {% for key in userKeyList %}
+                                    <option value ={{key}} {% if key == roster_data[0].user_id %} selected {% endif %}>{{key}}</option>
                             {% endfor %}
                             </select>
                         <input class="btn" type="submit" name = "editRoster" id="editRoster" value="Submit">

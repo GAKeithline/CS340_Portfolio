@@ -264,6 +264,7 @@ def editInjury(id):
 #-----------------------------------------------------------------
 # 'Players' CRUD
 # Structure based on Flask Start Guide. Queries are original work.
+# team and inj KeyLists are original work.
 #-----------------------------------------------------------------
 
 # 'Display' Players table and enable 'Create' functionality
@@ -282,13 +283,27 @@ def players():
         cur.execute(query2)
         team_data = cur.fetchall()
 
+        # Order the keys in ascending order for user convenience
+        teamKeyList = []
+        for row in team_data:
+            for key in row.keys():
+                teamKeyList.append(row[key])
+        teamKeyList.sort()
+
         # Used in drop down menu
         query3 = "SELECT injury_tag FROM Injury_Status;"
         cur = mysql.connection.cursor()
         cur.execute(query3)
         injury_data = cur.fetchall()
 
-        return render_template('players.j2', player_data = player_data, team_data = team_data, injury_data = injury_data)
+        # Order the keys in ascending order for user convenience
+        injKeyList = []
+        for row in injury_data:
+            for key in row.keys():
+                injKeyList.append(row[key])
+        injKeyList.sort()
+
+        return render_template('players.j2', player_data = player_data, team_data = team_data, injury_data = injury_data, teamKeyList=teamKeyList, injKeyList=injKeyList)
     
     # Add a new Player (Create)
     if request.method == 'POST':
@@ -337,13 +352,27 @@ def editPlayer(id):
         cur.execute(query2)
         team_data = cur.fetchall()
 
+        # Order the keys in ascending order for user convenience
+        teamKeyList = []
+        for row in team_data:
+            for key in row.keys():
+                teamKeyList.append(row[key])
+        teamKeyList.sort()
+
         # Used in drop down menu
         query3 = "SELECT injury_tag FROM Injury_Status"
         cur = mysql.connection.cursor()
         cur.execute(query3)
         injury_data = cur.fetchall()
 
-        return render_template("editPlayer.j2", player_data=player_data, team_data=team_data, injury_data=injury_data)
+        # Order the keys in ascending order for user convenience
+        injKeyList = []
+        for row in injury_data:
+            for key in row.keys():
+                injKeyList.append(row[key])
+        injKeyList.sort()
+
+        return render_template("editPlayer.j2", player_data=player_data, team_data=team_data, injury_data=injury_data, teamKeyList=teamKeyList, injKeyList=injKeyList)
     
     # Allows database user to change row information based on player_id selection (Update)
     if request.method == "POST":
@@ -369,6 +398,7 @@ def editPlayer(id):
 #-----------------------------------------------------------------
 # 'Rosters' CRUD
 # Structure based on Flask Start Guide. Queries are original work.
+# userKeyList is original work.
 #-----------------------------------------------------------------
 
 # 'Display' Rosters table and enable 'Create' functionality
@@ -387,7 +417,14 @@ def rosters():
         cur.execute(query2)
         user_data = cur.fetchall()
 
-        return render_template('rosters.j2', roster_data = roster_data, user_data = user_data)
+        # Order the keys in ascending order for user convenience
+        userKeyList = []
+        for row in user_data:
+            for key in row.keys():
+                userKeyList.append(row[key])
+        userKeyList.sort()
+
+        return render_template('rosters.j2', roster_data = roster_data, user_data = user_data, userKeyList = userKeyList)
     
     # Add a new Roster (Create)
     if request.method == 'POST':
@@ -428,7 +465,14 @@ def editRoster(id):
         cur.execute(query2)
         user_data = cur.fetchall()
 
-        return render_template("editRoster.j2", roster_data=roster_data, user_data=user_data)
+        # Order the keys in ascending order for user convenience
+        userKeyList = []
+        for row in user_data:
+            for key in row.keys():
+                userKeyList.append(row[key])
+        userKeyList.sort()
+
+        return render_template("editRoster.j2", roster_data=roster_data, user_data=user_data, userKeyList=userKeyList)
     
     # Allows database user to change row information based on roster_id selection (Update)
     if request.method == "POST":
@@ -445,8 +489,9 @@ def editRoster(id):
         return redirect("/rosters")
 
 #-----------------------------------------------------------------
-# 'Rosters' CRUD
+# 'Players_Rosters' CRUD
 # Structure based on Flask Start Guide. Queries are original work.
+# player and roster KeyLists are original work.
 #-----------------------------------------------------------------
 
 # 'Display' Players_Rosters table and enable 'Create' functionality
@@ -465,13 +510,27 @@ def relations():
         cur.execute(query2)
         player_data = cur.fetchall()
 
+        # Order the keys in ascending order for user convenience
+        playerKeyList = []
+        for row in player_data:
+            for key in row.keys():
+                playerKeyList.append(row[key])
+        playerKeyList.sort()
+
         # Used in a drop down menu
         query3 = "SELECT roster_id FROM Rosters"
         cur = mysql.connection.cursor()
         cur.execute(query3)
         roster_data = cur.fetchall()
 
-        return render_template('playersRosters.j2', pr_data = pr_data, player_data = player_data, roster_data = roster_data)
+        # Order the keys in ascending order for user convenience
+        rosterKeyList = []
+        for row in roster_data:
+            for key in row.keys():
+                rosterKeyList.append(row[key])
+        rosterKeyList.sort()
+
+        return render_template('playersRosters.j2', pr_data = pr_data, player_data = player_data, roster_data = roster_data, playerKeyList=playerKeyList, rosterKeyList=rosterKeyList)
     
     # Add a new Relationship (Create)
     if request.method == 'POST':
@@ -513,13 +572,27 @@ def editRelation(id):
         cur.execute(query2)
         player_data = cur.fetchall()
 
+        # Order the keys in ascending order for user convenience
+        playerKeyList = []
+        for row in player_data:
+            for key in row.keys():
+                playerKeyList.append(row[key])
+        playerKeyList.sort()
+
         # Used in a drop down menu
         query3 = "SELECT roster_id FROM Rosters"
         cur = mysql.connection.cursor()
         cur.execute(query3)
         roster_data = cur.fetchall()
 
-        return render_template("editPlayerRoster.j2", relation_data = relation_data, player_data = player_data, roster_data=roster_data)
+        # Order the keys in ascending order for user convenience
+        rosterKeyList = []
+        for row in roster_data:
+            for key in row.keys():
+                rosterKeyList.append(row[key])
+        rosterKeyList.sort()
+
+        return render_template("editPlayerRoster.j2", relation_data = relation_data, player_data = player_data, roster_data=roster_data, playerKeyList=playerKeyList, rosterKeyList=rosterKeyList)
     
     # Allows database user to change row information based on playerRoster_id selection (Update)
     if request.method == "POST":
