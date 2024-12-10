@@ -13,6 +13,11 @@ DROP TABLE IF EXISTS Users;
 DROP TABLE IF EXISTS Teams;
 DROP TABLE IF EXISTS Injury_Status;
 
+
+-- ========================
+-- TABLE CREATION
+-- ========================
+
 -- Create Injury_Status Table
 CREATE OR REPLACE TABLE Injury_Status (
     injury_id int NOT NULL AUTO_INCREMENT,
@@ -93,11 +98,11 @@ CREATE OR REPLACE TABLE Players_Rosters (
 
 -- Insert data into Injury_Status Table
 INSERT INTO Injury_Status (injury_tag, injury_description) VALUES
+('NULL', 'Player is healthy.'),
 ('QUES', 'Questionable: Player is day to day. Likely to play, but may sit out.'),
 ('DOUBT', 'Doubtful: Player is unlikely to play, possibly could.'),
 ('OUT', 'Out: Player is not playing this week.'),
-('IR', 'Injured Reserve: Player is dealing with a major injury and will miss significant time.'),
-('NULL', 'Player is healthy.');
+('IR', 'Injured Reserve: Player is dealing with a major injury and will miss significant time.');
 
 
 -- Insert data into Users Table
@@ -105,35 +110,47 @@ INSERT INTO Users (user_name, user_email, user_password) VALUES
 ('Alex Keithline', 'keithlig@oregonstate.edu', '123456'),
 ('Sayid Ali', 'als@oregonstate.edu', '654321'),
 ('Some Dude', 'some.dude@gmail.com', '123321'),
-('Some Lady', 'some.lady@msn.com', '321123');
+('Some Lady', 'some.lady@msn.com', '321123'),
+('Sonic the Hedgehog', 'gottaGoFast@speed.org', 'zoomzoom');
 
 -- Insert data into Teams Table
 INSERT INTO Teams (team_id, team_name, team_win, team_loss) VALUES
-(11, 'Milwaukee Bucks', 1, 3),
-(12, 'Los Angeles Lakers', 3, 1),
-(13, 'Minnesota Timberwolves', 2, 1),
-(14, 'Cleveland Cavaliers', 1, 3);
+(11, 'Milwaukee Bucks', 12, 11),
+(12, 'Los Angeles Lakers', 33, 11),
+(13, 'Minnesota Timberwolves', 12, 11),
+(14, 'Cleveland Cavaliers', 21, 4),
+(15, 'Portland Trail Blazers', 8, 16);
 
 -- Insert data into Rosters Table
 INSERT INTO Rosters (roster_id, roster_name, user_id) VALUES
 (8, 'Globetrotters', 2),
-(9, 'Moonwalkers', 1),
-(10, 'Astrosteppers', 4),
-(11, 'Galaxyjoggers', 1);
+(9, 'Moonwalkers', 4),
+(10, 'Astrosteppers', 1),
+(11, 'Galaxyjoggers', 5);
 
 -- Insert data into Players Table
 INSERT INTO Players (player_id, player_name, point_stat, assist_stat, rebound_stat, block_stat, steal_stat, timePlayed_stat, team_id, injury_id) VALUES
-(1, 'Lebron James', 20, 7, 7, 1, 0, 35, 12, NULL),
-(2, 'Anthony Edwards', 28, 4, 6, 0, 1, 40, 13, 1, 'QUES'),
-(3, 'Kris Middleton', NULL, NULL, NULL, NULL, NULL, NULL, 11, 3, 'OUT'),
-(4, 'Dean Wade', 7, 2, 5, NULL, 1, 23, 14, NULL);
+(1, 'Lebron James', 23, 9, 8, 1, 1, 35, 12, NULL),
+(2, 'Anthony Edwards', 27, 4, 6, 1, 1, 36, 13, 'QUES'),
+(3, 'Khris Middleton', 11, 6, 3, 1, 1, 22, 11, 'QUES'),
+(4, 'Dean Wade', 6, 2, 5, NULL, 1, 22, 14, NULL),
+(5, 'Anthony Davis', 28, 4, 11, 2, 1, 36, 12, 'NULL'),
+(6, 'Rudy Gobert', 11, 2, 11, 2, 1, 34, 13, 'NULL'),
+(7, 'Giannis Antetokounmpo', 33, 6, 12, 1, 1, 35, 11, 'DOUBT'),
+(8, 'Georges Niang', 8, 1, 4, NULL, NULL, 21, 14, 'NULL'),
+(9, 'Scoot Henderson', 12, 5, 3, 0, 1, 26, 15, 'NULL'),
+(10, 'Robert Williams III', 10, 1, 6, 2, 1, 19, 15, 'OUT');
 
 -- Insert data into Players_Rosters Table
 INSERT INTO Players_Rosters (playerRoster_id, roster_id, player_id) VALUES
-(1, 9, 2),
-(2, 10, 1),
-(3, 11, 4),
-(4, 9, 3);
+(1, 10, 7),
+(2, 10, 10),
+(3, 10, 6),
+(4, 9, 3),
+(5, 9, 9),
+(6, 8, 1),
+(7, 11, 2),
+(8, 8, 4);
 
 SET FOREIGN_KEY_CHECKS=1;
 COMMIT;

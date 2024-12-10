@@ -2,7 +2,10 @@
 -- Date: 11/07/2024
 -- Data Manipulation Queries
 
--- Users
+
+-- =====================
+-- USERS
+-- =====================
 
 -- Retrieve Users (user_id, user_name, user_email)
 SELECT user_id as ID, user_name as Name, user_email as 'Email Address', user_password as Password
@@ -24,8 +27,9 @@ DELETE FROM Users
 WHERE user_id = :userIDInput;
 
 
--- Teams
-
+-- =====================
+-- TEAMS
+-- =====================
 
 -- Retrieve Teams (team_id, team_name, team_win, team_loss)
 SELECT team_id as ID, team_name as 'Team Name', team_win as Wins, team_loss as Losses
@@ -47,13 +51,16 @@ DELETE FROM Teams
 WHERE team_id = :teamIDInput;
 
 -- Filter players by team
--- Will be activated by clicking the team name, which will be an HTML button
+-- Will be activated by clicking the 'View Team' button in the Teams table
 SELECT Teams.team_id as ID, Teams.team_name as 'Team Name', Players.player_name as Player, 
 FROM Players
 JOIN Teams ON Players.team_id = Teams.team_id
 WHERE Teams.team_id = :teamIDSelection;
 
+
+-- =====================
 -- Players
+-- =====================
 
 -- Retrieve Players (player_id, player_name, stats)
 SELECT player_id as ID, player_name as 'Player Name', point_stat as Points, assist_stat as Assists, 
@@ -61,10 +68,12 @@ SELECT player_id as ID, player_name as 'Player Name', point_stat as Points, assi
 FROM Players;
 
 -- Sort Players descending by stat
+-- Ultimately not implemented. But would be pretty easy to write in by making the table heads into href links
 SELECT * FROM Players
 ORDER BY Players.:statInput DESC;
 
 -- Search by Player Name
+-- Ultimately not implemented.
 SELECT * FROM Players
 WHERE Players.player_name = :playerNameInput;
 
@@ -89,7 +98,10 @@ WHERE player_id = :playerIDInput;
 DELETE FROM Players 
 WHERE player_id = :playerIDInput;
 
--- Rosters
+
+-- =====================
+-- ROSTERS
+-- =====================
 
 -- Retrieve Rosters (roster_id, roster_name, user_id)
 SELECT roster_id as ID, roster_name as 'Roster Name', user_id as User
@@ -99,7 +111,7 @@ FROM Rosters;
 INSERT INTO Rosters (roster_name, user_id)
 VALUES (:rosterNameInput, :userIDInput);
 
--- Update a Roster's name
+-- Update a Roster's information
 UPDATE Rosters 
 SET roster_name = :rosterNameInput, 
     user_id = :userIDInput
@@ -110,7 +122,7 @@ DELETE FROM Rosters
 WHERE roster_id = :rosterIDInput;
 
 -- Filter Players by Roster
--- Will be activated by clicking the roster name, which will be an HTML button
+-- Will be activated by clicking the 'View Roster' button in the Rosters table.
 SELECT Players_Rosters.roster_id as ID, Rosters.roster_name as 'Roster name', Players.player_name as Player, 
 FROM Players
 JOIN Players_Rosters ON Players.player_id = Players_Rosters.player_id
@@ -118,8 +130,13 @@ JOIN Rosters ON Players_Rosters.roster_id = Rosters.roster_id
 WHERE Rosters.roster_name = :rosterNameSelection;
 
 
+-- =====================
 -- Players_Rosters
+-- =====================
 
+-- Display intersection table
+SELECT playerRoster_id as ID, player_id as 'Player ID', roster_id as 'Roster ID' 
+FROM Players_Rosters;
 
 -- Add Player to a Roster
 INSERT INTO Players_Rosters (player_id, roster_id)
@@ -127,18 +144,20 @@ VALUES (:playerIDInput, :rosterIDInput);
 
 -- Remove Player from a Roster
 DELETE FROM Players_Rosters 
-WHERE player_id = :playerIDInput AND roster_id = :rosterIDInput;
+WHERE playerRoster_id = :playerRosterIDInput;
 
 
+-- =====================
 -- Injury_Status
+-- =====================
 
--- Retrieve Injury Statuses (injury_id, injury_description)
+-- Retrieve Injury Statuses (injury_id, injury_tag, injury_description)
 SELECT injury_id as ID, injury_tag as Tag, injury_description as 'Status Description' 
 FROM Injury_Status;
 
 -- Insert new Injury Status
 INSERT INTO Injury_Status (injury_tag, injury_description)
-VALUES (:injuryIDInput, :injuryNameInput);
+VALUES (:injuryTagInput, :injuryDescriptionInput);
 
 -- Update an Injury Status description
 UPDATE Injury_Status 
