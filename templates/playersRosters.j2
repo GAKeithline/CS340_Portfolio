@@ -25,6 +25,9 @@
     <title>Slam Dunk- Players-Rosters</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' href="{{ url_for('static', filename='dunk.css')}}">
+
+    <!--Hide extra CRUD fields until called upon.-->
+    <!-- Adapted from Dr. Curry -->
     <script language="JavaScript">
         function reveal(command) {
             if (command == 'add'){
@@ -65,6 +68,7 @@
         </section>
     </header>
 
+<!-- DISPLAY FUNCTION -->
     <main>
         <div id="read">
             <table align="center">
@@ -84,7 +88,9 @@
                                 {% for key in row.keys() %}
                                 <td> {{row[key]}} </td>
                                 {% endfor %}
+                                <!-- UPDATE FUNCTION -->
                                 <td><a href="editRelation/{{row.ID}}"><button>Update</button></a></td>
+                                <!-- REMOVE FUNCTION -->
                                 <td><a href="removeRelation/{{row.ID}}"><button>Remove</button></a> </td>
                             </tr>
                         {% endfor %}
@@ -92,21 +98,22 @@
                 {% endif %}
             </table>
         <p>&nbsp;</p>
-        </div> <!-- read -->
+        </div>
 
+    <!-- CREATE FUNCTION -->
         <div id="add" align="center">
             <form method="POST" id="addRelation" action="/playersRosters">
                 <legend><strong>Add Relation</strong></legend>
                 <fieldset class="acres">
                     <label>Player ID</label>
                         <select name="player" class="form-control" id="player">
-                            {% for key in playerKeyList %}
+                            {% for key in playerKeyList %}    <!-- Make use of the pre-sorted list. Original work. -->
                                 <option value ={{key}}>{{key}}</option>
                         {% endfor %}
                         </select>
                     <label>Roster ID</label>
                         <select name="roster" class="form-control" id="roster">
-                            {% for key in rosterKeyList %}
+                            {% for key in rosterKeyList %}    <!-- Make use of the pre-sorted list. Original work. -->
                                 <option value ={{key}}>{{key}}</option>
                         {% endfor %}
                         </select>
@@ -115,7 +122,7 @@
                     <input class="btn" type="button" value="Cancel" onClick="readFields()">
             </form>
             <p>&nbsp;</p>
-        </div> <!-- add -->
+        </div>
 
 
     </main>

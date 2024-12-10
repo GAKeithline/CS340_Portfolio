@@ -25,6 +25,9 @@
     <title>Slam Dunk- Injury Status</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' href="{{ url_for('static', filename='dunk.css')}}">
+
+    <!--Hide extra CRUD fields until called upon.-->
+    <!-- Adapted from Dr. Curry -->
     <script language="JavaScript">
         function reveal(command) {
             if (command == 'add'){
@@ -64,6 +67,7 @@
         </section>
     </header>
 
+<!-- DISPLAY FUNCTION -->
     <main>
         <div id="read">
             <table align="center">
@@ -83,7 +87,9 @@
                                 {% for key in row.keys() %}
                                 <td> {{row[key]}} </td>
                                 {% endfor %}
+                                <!-- UPDATE FUNCTION -->
                                 <td><a href="editInjury/{{row.ID}}"><button>Update</button></a></td>
+                                <!-- REMOVE FUNCTION -->
                                 <td><a href="removeInjury/{{row.ID}}"><button>Remove</button></a> </td>
                             </tr>
                         {% endfor %}
@@ -91,8 +97,9 @@
                 {% endif %}
             </table>
         <p>&nbsp;</p>
-        </div> <!-- read -->
+        </div>
 
+    <!-- CREATE FUNCTION -->
         <div id="add" align="center">
             <form method="POST" id="addInjury" action="/injuryStatus">
                 <legend><strong>Add Status</strong></legend>
@@ -104,7 +111,7 @@
                     <input class="btn" type="button" value="Cancel" onClick="readFields()">
             </form>
             <p>&nbsp;</p>
-        </div> <!-- add -->
+        </div>
 
 
     </main>

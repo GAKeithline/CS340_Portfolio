@@ -25,6 +25,9 @@
     <title>Slam Dunk- Rosters</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' href="{{ url_for('static', filename='dunk.css')}}">
+
+    <!--Hide extra CRUD fields until called upon.-->
+    <!-- Adapted from Dr. Curry -->
     <script language="JavaScript">
         function reveal(command) {
             if (command == 'add'){
@@ -64,6 +67,7 @@
         </section>
     </header>
 
+<!-- DISPLAY FUNCTION -->
     <main>
         <div id="read">
             <table align="center">
@@ -85,7 +89,9 @@
                                 <td> {{row[key]}} </td>
                                 {% endfor %}
                                 <td><a href="viewRoster/{{row.ID}}"><button>View Roster</button></a></td>
+                                <!-- UPDATE FUNCTION -->
                                 <td><a href="editRoster/{{row.ID}}"><button>Update</button></a></td>
+                                <!-- REMOVE FUNCTION -->
                                 <td><a href="removeRoster/{{row.ID}}"><button>Remove</button></a> </td>
                             </tr>
                         {% endfor %}
@@ -93,8 +99,9 @@
                 {% endif %}
             </table>
         <p>&nbsp;</p>
-        </div> <!-- read -->
+        </div>
 
+    <!-- CREATE FUNCTION -->
         <div id="add" align="center">
             <form method="POST" id="addRoster" action="/rosters">
                 <legend><strong>Add Roster</strong></legend>
@@ -102,7 +109,7 @@
                     <label>Roster Name: </label> <input type="text" name="roster_name" class="form-control" id="rname" placeholder="Roster Name" required>
                     <label>User ID: </label>
                         <select name="roster_user" class="form-control" id="roster_user">
-                            {% for key in userKeyList %}
+                            {% for key in userKeyList %}    <!-- Make use of the pre-sorted list. Original work. -->
                                 <option value ={{key}}>{{key}}</option>
                             {% endfor %}
                         </select>
@@ -111,7 +118,7 @@
                     <input class="btn" type="button" value="Cancel" onClick="readFields()">
             </form>
             <p>&nbsp;</p>
-        </div> <!--add-->
+        </div>
 
             </main>
     <footer>

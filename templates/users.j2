@@ -26,6 +26,9 @@
     <title>Slam Dunk- Users</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' href="{{ url_for('static', filename='dunk.css')}}">
+
+    <!--Hide extra CRUD fields until called upon.-->
+    <!-- Adapted from Dr. Curry -->
     <script language="JavaScript">
         function reveal(command) {
             if (command == 'add'){
@@ -65,12 +68,14 @@
         </section>
     </header>
 
+<!-- DISPLAY FUNCTION -->
     <main>
         <div id="read">
-            <table align="center">
-                {% if user_data %}
+            <table align="center">     <!--Table adapted from Flask Starter App -->
+                {% if user_data %}  
                     <thead>
                         <tr align="left" border-bottom="3px solid black">
+                            <!-- Cycle through the first row: the headers -->
                             {% for key in user_data[0].keys() %}
                             <th scope='col' data-field='{{ key }}' data-filter-control='input'>{{ key }}</th>
                             {% endfor %}
@@ -81,10 +86,13 @@
                     <tbody>
                         {% for row in user_data %}
                             <tr>
+                                <!-- Populate data fields in the table -->
                                 {% for key in row.keys() %}
                                 <td> {{row[key]}} </td>
                                 {% endfor %}
+                                <!-- UPDATE FUNCTION -->
                                 <td><a href="editUser/{{row.ID}}"><button>Update</button></a></td>
+                                <!-- REMOVE FUNCTION -->
                                 <td><a href="removeUser/{{row.ID}}"><button>Remove</button></a> </td>
                             </tr>
                         {% endfor %}
@@ -92,8 +100,9 @@
                 {% endif %}
             </table>
         <p>&nbsp;</p>
-        </div> <!-- read -->
+        </div>
 
+    <!-- CREATE FUNCTION -->
         <div id="add" align="center">
             <form method="POST" id="addUser" action="/users">
                 <legend><strong>Add User</strong></legend>
@@ -106,7 +115,7 @@
                     <input class="btn" type="button" value="Cancel" onClick="readFields()">
             </form>
             <p>&nbsp;</p>
-        </div> <!-- add -->
+        </div>
 
 
     </main>
