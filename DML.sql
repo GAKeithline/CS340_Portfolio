@@ -1,7 +1,11 @@
 -- Project Group 14 - Sayid Ali and Gilbert Keithline
+-- Course: CS340
 -- Date: 11/07/2024
 -- Data Manipulation Queries
 
+
+-- All queries have been verified to work with Group 14's CS340 Portfolio project.
+-- All queries are original work and all but two of the queries are active in the final product.
 
 -- =====================
 -- USERS

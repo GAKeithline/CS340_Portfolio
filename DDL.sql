@@ -1,7 +1,20 @@
 -- Project Group 14 - Sayid Ali and Gilbert Keithline 
+-- Course: CS340
 -- Date: 10/29/2024
 -- Source URL: https://canvas.oregonstate.edu/courses/1976520/pages/activity-1-creating-a-customer-object-table?module_item_id=24719034
 
+--Citation for: Disabling and Enabling of Foreign Key Checks 
+--Date: 10/29/2024
+--Copied from: OSU CS340: Project Step 2 Draft: Normalized Schema + DDL with Sample Data
+--Source URL: https://canvas.oregonstate.edu/courses/1976520/assignments/9783693?module_item_id=24719057
+
+
+-- Table Creation queries are in line with Group 14's Project outline and
+-- are able to be copy/pasted directly into phpMyAdmin to populate accurate tables.
+-- All queries are original work unless otherwise noted.
+
+
+-- Disable foreign key checks until sample data is populated
 SET FOREIGN_KEY_CHECKS=0;
 SET AUTOCOMMIT = 0;
 
@@ -152,5 +165,6 @@ INSERT INTO Players_Rosters (playerRoster_id, roster_id, player_id) VALUES
 (7, 11, 2),
 (8, 8, 4);
 
+-- Restore foreign key checks so database can be accurately tested.
 SET FOREIGN_KEY_CHECKS=1;
 COMMIT;
