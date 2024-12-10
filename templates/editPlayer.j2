@@ -1,3 +1,17 @@
+<!--Project Group 14 - Sayid Ali and Gilbert Keithline-->
+<!--Date: 12/9/2024-->
+<!--Project Part 6 FINAL-->
+
+<!--Citation for: CSS implementation in Flask-->
+<!--Date: 11/19/2024-->
+<!--Copied from: Stack Overflow-->
+<!--Source URL: https://stackoverflow.com/questions/22259847/application-not-picking-up-css-file-flask-python-->
+
+<!--Citation for: Flask-Python html code-->
+<!--Date: 11/17/2024-->
+<!--Adapted from: OSU CS340 - Flask Starter App-->
+<!--Source URL: https://github.com/osu-cs340-ecampus/flask-starter-app-->
+
 <html>
 <head>
     <meta charset='utf-8'>
@@ -30,13 +44,13 @@
                         <input type="hidden" class="form-control" name="player_id" id="player_id" value="{{player_data[0].player_id}}" required>
                         <label>Player ID: </label> {{player_data[0].player_id}}
                         <label>Player Name: </label> <input type="text" name="player_name" class="form-control" id="pname" placeholder="{{player_data[0].player_name}}" value="{{player_data[0].player_name}}" required>
-                        <label>Points: </label> <input type="number" name="player_points" class="form-control" id="points" placeholder="{{player_data[0].point_stat}}" value="{{player_data[0].point_stat}}" required>
-                        <label>Assists: </label> <input type="number" name="player_assists" class="form-control" id="assists" placeholder="{{player_data[0].assist_stat}}" value="{{player_data[0].assist_stat}}" required>
-                        <label>Rebounds: </label> <input type="number" name="player_rebounds" class="form-control" id="rebounds" placeholder="{{player_data[0].rebound_stat}}" value="{{player_data[0].rebound_stat}}" required>
+                        <label>Points: </label> <input type="number" name="player_points" class="form-control" id="points" placeholder="{{player_data[0].point_stat}}" value="{{player_data[0].point_stat}}">
+                        <label>Assists: </label> <input type="number" name="player_assists" class="form-control" id="assists" placeholder="{{player_data[0].assist_stat}}" value="{{player_data[0].assist_stat}}">
+                        <label>Rebounds: </label> <input type="number" name="player_rebounds" class="form-control" id="rebounds" placeholder="{{player_data[0].rebound_stat}}" value="{{player_data[0].rebound_stat}}">
                         <p></P>
-                        <label>Blocks: </label> <input type="number" name="player_blocks" class="form-control" id="blocks" placeholder="{{player_data[0].block_stat}}" value="{{player_data[0].block_stat}}" required>
-                        <label>Steals: </label> <input type="number" name="player_steals" class="form-control" id="steals" placeholder="{{player_data[0].steal_stat}}" value="{{player_data[0].steal_stat}}" required>
-                        <label>Minutes: </label> <input type="number" name="player_minutes" class="form-control" id="minutes" placeholder="{{player_data[0].timePlayed_stat}}" value="{{player_data[0].timePlayed_stat}}" required>
+                        <label>Blocks: </label> <input type="number" name="player_blocks" class="form-control" id="blocks" placeholder="{{player_data[0].block_stat}}" value="{{player_data[0].block_stat}}">
+                        <label>Steals: </label> <input type="number" name="player_steals" class="form-control" id="steals" placeholder="{{player_data[0].steal_stat}}" value="{{player_data[0].steal_stat}}">
+                        <label>Minutes: </label> <input type="number" name="player_minutes" class="form-control" id="minutes" placeholder="{{player_data[0].timePlayed_stat}}" value="{{player_data[0].timePlayed_stat}}">
                         <label>Team ID: </label> 
                             <select name="player_team" class="form-control" id="player_team">
                             {% for row in team_data %}

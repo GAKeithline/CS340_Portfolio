@@ -1,3 +1,23 @@
+<!--Project Group 14 - Sayid Ali and Gilbert Keithline-->
+<!--Date: 12/9/2024-->
+<!--Project Part 6 FINAL-->
+
+<!--Citation for 'reveal()' function-->
+<!--Based on Dr. Curry's function 'showForm()' as 
+    demonstrated in Module 6: Exploration- Web Application Technology -->
+<!--Date: 11/05/2024-->
+<!--Source URL: https://canvas.oregonstate.edu/courses/1976520/pages/exploration-web-application-technology?module_item_id=24719064-->
+
+<!--Citation for: CSS implementation in Flask-->
+<!--Date: 11/19/2024-->
+<!--Copied from: Stack Overflow-->
+<!--Source URL: https://stackoverflow.com/questions/22259847/application-not-picking-up-css-file-flask-python-->
+
+<!--Citation for: Flask-Python html code-->
+<!--Date: 11/17/2024-->
+<!--Adapted from: OSU CS340 - Flask Starter App-->
+<!--Source URL: https://github.com/osu-cs340-ecampus/flask-starter-app-->
+
 <html>
 <head>
     <meta charset='utf-8'>
@@ -13,24 +33,6 @@
                 document.getElementById('edit').style.display = 'none';
                 document.getElementById('remove').style.display = 'none';
             }
-            else if (command == 'remove'){
-                document.getElementById('read').style.display = 'none';
-                document.getElementById('add').style.display = 'none';
-                document.getElementById('edit').style.display = 'none';
-                document.getElementById('remove').style.display = 'block';
-            }
-            else if (command =='edit'){
-                document.getElementById('read').style.display = 'none';
-                document.getElementById('add').style.display = 'none';
-                document.getElementById('edit').style.display = 'block';
-                document.getElementById('remove').style.display = 'none';
-            }
-            else if (command == 'all'){
-                document.getElementById('read').style.display = 'block';
-                document.getElementById('add').style.display = 'block';
-                document.getElementById('edit').style.display = 'block';
-                document.getElementById('remove').style.display = 'block';
-            }
             else {
                 document.getElementById('read').style.display = 'block';
                 document.getElementById('add').style.display = 'none';
@@ -39,10 +41,7 @@
             }
         }
         function addField() {reveal('add');}
-        function removeField(id) {reveal('remove');}
-        function editField(id) {reveal('edit');}
         function readFields() {reveal('read');}
-        function revealAll() {reveal('all')}
     </script>
 </head>
 
@@ -99,13 +98,13 @@
                 <legend><strong>Add Player</strong></legend>
                 <fieldset class="acres">
                     <label>Player Name: </label> <input type="text" name="player_name" class="form-control" id="pname" placeholder="Player Name" required>
-                    <label>Points: </label> <input type="number" name="player_points" class="form-control" id="points" placeholder="0" value="0" required>
-                    <label>Assists: </label> <input type="number" name="player_assists" class="form-control" id="assists" placeholder="0" value="0" required>
-                    <label>Rebounds: </label> <input type="number" name="player_rebounds" class="form-control" id="rebounds" placeholder="0" value="0"required>
+                    <label>Points: </label> <input type="number" name="player_points" class="form-control" id="points" placeholder="0" value="0">
+                    <label>Assists: </label> <input type="number" name="player_assists" class="form-control" id="assists" placeholder="0" value="0">
+                    <label>Rebounds: </label> <input type="number" name="player_rebounds" class="form-control" id="rebounds" placeholder="0" value="0">
                     <p></p>
-                    <label>Blocks: </label> <input type="number" name="player_blocks" class="form-control" id="blocks" placeholder="0" value="0"required>
-                    <label>Steals: </label> <input type="number" name="player_steals" class="form-control" id="steals" placeholder="0" value="0"required>
-                    <label>Minutes: </label> <input type="number" name="player_minutes" class="form-control" id="minutes" placeholder="0" value="0"required>
+                    <label>Blocks: </label> <input type="number" name="player_blocks" class="form-control" id="blocks" placeholder="0" value="0">
+                    <label>Steals: </label> <input type="number" name="player_steals" class="form-control" id="steals" placeholder="0" value="0">
+                    <label>Minutes: </label> <input type="number" name="player_minutes" class="form-control" id="minutes" placeholder="0" value="0">
                     <label>Team: </label> 
                         <select name="player_team" class="form-control" id="player_team">
                         {% for row in team_data %}

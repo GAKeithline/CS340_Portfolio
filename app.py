@@ -1,16 +1,27 @@
 # Project Group 14 - Sayid Ali and Gilbert Keithline
-# Date: 11/19/2024
-# Project Part 4 DRAFT- Enable CRUD functionality for one entity table
+# Date: 12/9/2024
+# Project Part 6 FINAL
 
-# Citation for: CSS style sheet implementation
+# Citation for: CSS implementation in Flask
 # Date: 11/19/2024
 # Copied from: Stack Overflow
 # Source URL: https://stackoverflow.com/questions/22259847/application-not-picking-up-css-file-flask-python
 
-# Citation for: Flask app.py construction
+# Citation for: Flask app.py structure and construction, gunicorn implementation
 # Date: 11/17/2024
 # Adapted from: OSU CS340 - Flask Starter App
 # Source URL: https://github.com/osu-cs340-ecampus/flask-starter-app
+
+# Citation for: Code Citations
+# Date: 11/17/2024
+# Adapted from: OSU Code Citation Tips
+# Source URL: https://canvas.oregonstate.edu/courses/1976520/pages/code-citation-tips?module_item_id=24718997
+
+
+#------------------------------------------------------------
+# Setup Flask and connect to database
+# All code based on Flask Starter App
+#------------------------------------------------------------
 
 from flask import Flask, render_template, json, redirect
 from flask_mysqldb import MySQL
@@ -28,7 +39,10 @@ app.config["MYSQL_DB"] = "cs340_keithlig"
 app.config["MYSQL_CURSORCLASS"] = "DictCursor"
 
 mysql = MySQL(app)
-# Routes 
+
+#------------------------------------------------------------
+# Set Homepage
+#------------------------------------------------------------
 
 @app.route('/')
 # Set landing page
@@ -40,8 +54,13 @@ def home():
 def index():
     return render_template('index.j2')
 
-@app.route("/users", methods=["POST", "GET"])
+#-----------------------------------------------------------------
+# 'Users' CRUD
+# Structure based on Flask Start Guide. Queries are original work.
+#-----------------------------------------------------------------
+
 # 'Display' Users table and enable 'Create' functionality
+@app.route("/users", methods=["POST", "GET"])
 def users():
     # Render the table (Display)
     if request.method == 'GET':
@@ -64,10 +83,10 @@ def users():
             cursor.execute(query, (name, email, pword))
             mysql.connection.commit()
         
-        return redirect("/users")
+        return redirect("/users") # calls for a page re-render after each update. Ensures the user sees an up to date table.
 
-@app.route("/removeUser/<int:id>")
 # 'Remove' a table item
+@app.route("/removeUser/<int:id>")
 def removeUser(id):
     # Deletes a User (Remove)
     query = "DELETE FROM Users WHERE user_id = '%s';"
@@ -77,8 +96,8 @@ def removeUser(id):
 
     return redirect("/users")
 
-@app.route("/editUser/<int:id>", methods=["POST", "GET"])
 # Enables 'Update' funtionality for User items
+@app.route("/editUser/<int:id>", methods=["POST", "GET"])
 def editUser(id):
     # Renders the update template
     if request.method == "GET":
@@ -103,10 +122,14 @@ def editUser(id):
                 mysql.connection.commit()
                 
         return redirect("/users")
-    
 
-@app.route("/teams", methods=["POST", "GET"])
+#-----------------------------------------------------------------
+# 'Teams' CRUD
+# Structure based on Flask Start Guide. Queries are original work.
+#-----------------------------------------------------------------    
+
 # 'Display' Teams table and enable 'Create' functionality
+@app.route("/teams", methods=["POST", "GET"])
 def teams():
     # Render the table (Display)
     if request.method == 'GET':
@@ -130,9 +153,9 @@ def teams():
             mysql.connection.commit()
         
         return redirect("/teams")
-    
+
+# 'Remove' a table item    
 @app.route("/removeTeam/<int:id>")
-# 'Remove' a table item
 def removeTeam(id):
     # Deletes a Team (Remove)
     query = "DELETE FROM Teams WHERE team_id = '%s';"
@@ -142,8 +165,8 @@ def removeTeam(id):
 
     return redirect("/teams")
 
-@app.route("/editTeam/<int:id>", methods=["POST", "GET"])
 # Enables 'Update' funtionality for Team items
+@app.route("/editTeam/<int:id>", methods=["POST", "GET"])
 def editTeam(id):
     # Renders the update template
     if request.method == "GET":
@@ -154,7 +177,7 @@ def editTeam(id):
 
         return render_template("editTeam.j2", team_data=team_data)
     
-    # Allows database user to change row information based on user_id selection (Update)
+    # Allows database user to change row information based on team_id selection (Update)
     if request.method == "POST":
         if request.form.get("editTeam"):
                 id = request.form["team_id"]
@@ -168,9 +191,15 @@ def editTeam(id):
                 mysql.connection.commit()
                 
         return redirect("/teams")
-    
+
+
+#-----------------------------------------------------------------
+# 'Injury_Status' CRUD
+# Structure based on Flask Start Guide. Queries are original work.
+#-----------------------------------------------------------------
+
+# 'Display' Injury_Status table and enable 'Create' functionality    
 @app.route("/injuryStatus", methods=["POST", "GET"])
-# 'Display' Users table and enable 'Create' functionality
 def injury():
     # Render the table (Display)
     if request.method == 'GET':
@@ -181,7 +210,7 @@ def injury():
 
         return render_template('injuryStatus.j2', injury_data = injury_data)
     
-    # Add a new user (Create)
+    # Add a new Status (Create)
     if request.method == 'POST':
         if request.form.get("addInjury"):
             tag = request.form["injury_tag"]
@@ -193,11 +222,11 @@ def injury():
             mysql.connection.commit()
         
         return redirect("/injuryStatus")
-    
+
+# 'Remove' a table item    
 @app.route("/removeInjury/<int:id>")
-# 'Remove' a table item
 def removeInjury(id):
-    # Deletes a User (Remove)
+    # Deletes a Status (Remove)
     query = "DELETE FROM Injury_Status WHERE injury_id = '%s';"
     cursor = mysql.connection.cursor()
     cursor.execute(query, (id,))
@@ -205,8 +234,8 @@ def removeInjury(id):
 
     return redirect("/injuryStatus")
 
+# Enables 'Update' funtionality for Injury_Status items
 @app.route("/editInjury/<int:id>", methods=["POST", "GET"])
-# Enables 'Update' funtionality for User items
 def editInjury(id):
     # Renders the update template
     if request.method == "GET":
@@ -217,7 +246,7 @@ def editInjury(id):
 
         return render_template("editInjury.j2", injury_data=injury_data)
     
-    # Allows database user to change row information based on user_id selection (Update)
+    # Allows database user to change row information based on injury_id selection (Update)
     if request.method == "POST":
         if request.form.get("editInjury"):
                 id = request.form["injury_id"]
@@ -232,8 +261,13 @@ def editInjury(id):
         return redirect("/injuryStatus")
     
 
+#-----------------------------------------------------------------
+# 'Players' CRUD
+# Structure based on Flask Start Guide. Queries are original work.
+#-----------------------------------------------------------------
+
+# 'Display' Players table and enable 'Create' functionality
 @app.route("/players", methods=["POST", "GET"])
-# 'Display' Users table and enable 'Create' functionality
 def players():
     # Render the table (Display)
     if request.method == 'GET':
@@ -242,24 +276,21 @@ def players():
         cursor.execute(query)
         player_data = cursor.fetchall()
 
+        # Used in drop down menu
         query2 = "SELECT team_id FROM Teams;"
         cur = mysql.connection.cursor()
         cur.execute(query2)
         team_data = cur.fetchall()
 
+        # Used in drop down menu
         query3 = "SELECT injury_tag FROM Injury_Status;"
         cur = mysql.connection.cursor()
         cur.execute(query3)
         injury_data = cur.fetchall()
 
-        query4 = 'SELECT roster_id FROM Rosters;'
-        cur = mysql.connection.cursor()
-        cur.execute(query4)
-        roster_data = cur.fetchall()
-
-        return render_template('players.j2', player_data = player_data, team_data = team_data, injury_data = injury_data, roster_data = roster_data)
+        return render_template('players.j2', player_data = player_data, team_data = team_data, injury_data = injury_data)
     
-    # Add a new user (Create)
+    # Add a new Player (Create)
     if request.method == 'POST':
         if request.form.get("addPlayer"):
             name = request.form["player_name"]
@@ -278,11 +309,11 @@ def players():
             mysql.connection.commit()
         
         return redirect("/players")
-    
+
+# 'Remove' a table item    
 @app.route("/removePlayer/<int:id>")
-# 'Remove' a table item
 def removePlayer(id):
-    # Deletes a User (Remove)
+    # Deletes a Player (Remove)
     query = "DELETE FROM Players WHERE player_id = '%s';"
     cursor = mysql.connection.cursor()
     cursor.execute(query, (id,))
@@ -290,9 +321,8 @@ def removePlayer(id):
 
     return redirect("/players")
 
-
+# Enables 'Update' funtionality for Player items
 @app.route("/editPlayer/<int:id>", methods=["POST", "GET"])
-# Enables 'Update' funtionality for User items
 def editPlayer(id):
     # Renders the update template
     if request.method == "GET":
@@ -301,24 +331,21 @@ def editPlayer(id):
         cursor.execute(query)
         player_data = cursor.fetchall()
 
+        # Used in drop down menu
         query2 = "SELECT team_id FROM Teams"
         cur = mysql.connection.cursor()
         cur.execute(query2)
         team_data = cur.fetchall()
 
+        # Used in drop down menu
         query3 = "SELECT injury_tag FROM Injury_Status"
         cur = mysql.connection.cursor()
         cur.execute(query3)
         injury_data = cur.fetchall()
 
-        query4 = 'SELECT roster_id FROM Rosters;'
-        cur = mysql.connection.cursor()
-        cur.execute(query4)
-        roster_data = cur.fetchall()
-
-        return render_template("editPlayer.j2", player_data=player_data, team_data=team_data, injury_data=injury_data, roster_data=roster_data)
+        return render_template("editPlayer.j2", player_data=player_data, team_data=team_data, injury_data=injury_data)
     
-    # Allows database user to change row information based on user_id selection (Update)
+    # Allows database user to change row information based on player_id selection (Update)
     if request.method == "POST":
         if request.form.get("editPlayer"):
             id = request.form["player_id"]
@@ -338,9 +365,14 @@ def editPlayer(id):
             mysql.connection.commit()
                 
         return redirect("/players")
-    
+
+#-----------------------------------------------------------------
+# 'Rosters' CRUD
+# Structure based on Flask Start Guide. Queries are original work.
+#-----------------------------------------------------------------
+
+# 'Display' Rosters table and enable 'Create' functionality
 @app.route("/rosters", methods=["POST", "GET"])
-# 'Display' Users table and enable 'Create' functionality
 def rosters():
     # Render the table (Display)
     if request.method == 'GET':
@@ -349,6 +381,7 @@ def rosters():
         cursor.execute(query)
         roster_data = cursor.fetchall()
 
+        # Used in a drop down menu
         query2 = "SELECT user_id FROM Users"
         cur = mysql.connection.cursor()
         cur.execute(query2)
@@ -356,7 +389,7 @@ def rosters():
 
         return render_template('rosters.j2', roster_data = roster_data, user_data = user_data)
     
-    # Add a new user (Create)
+    # Add a new Roster (Create)
     if request.method == 'POST':
         if request.form.get("addRoster"):
             name = request.form["roster_name"]
@@ -368,11 +401,11 @@ def rosters():
             mysql.connection.commit()
         
         return redirect("/rosters")
-    
-@app.route("/removeRoster/<int:id>")
+
 # 'Remove' a table item
+@app.route("/removeRoster/<int:id>")
 def removeRoster(id):
-    # Deletes a User (Remove)
+    # Deletes a Roster (Remove)
     query = "DELETE FROM Rosters WHERE roster_id = '%s';"
     cursor = mysql.connection.cursor()
     cursor.execute(query, (id,))
@@ -380,8 +413,8 @@ def removeRoster(id):
 
     return redirect("/rosters")
 
+# Enables 'Update' funtionality for Roster items
 @app.route("/editRoster/<int:id>", methods=["POST", "GET"])
-# Enables 'Update' funtionality for User items
 def editRoster(id):
     # Renders the update template
     if request.method == "GET":
@@ -397,7 +430,7 @@ def editRoster(id):
 
         return render_template("editRoster.j2", roster_data=roster_data, user_data=user_data)
     
-    # Allows database user to change row information based on user_id selection (Update)
+    # Allows database user to change row information based on roster_id selection (Update)
     if request.method == "POST":
         if request.form.get("editRoster"):
             id = request.form["roster_id"]
@@ -410,9 +443,14 @@ def editRoster(id):
             mysql.connection.commit()
                 
         return redirect("/rosters")
-    
+
+#-----------------------------------------------------------------
+# 'Rosters' CRUD
+# Structure based on Flask Start Guide. Queries are original work.
+#-----------------------------------------------------------------
+
+# 'Display' Players_Rosters table and enable 'Create' functionality
 @app.route("/playersRosters", methods=["POST", "GET"])
-# 'Display' Users table and enable 'Create' functionality
 def relations():
     # Render the table (Display)
     if request.method == 'GET':
@@ -421,11 +459,13 @@ def relations():
         cursor.execute(query)
         pr_data = cursor.fetchall()
 
+        # Used in a drop down menu
         query2 = "SELECT player_id FROM Players"
         cur = mysql.connection.cursor()
         cur.execute(query2)
         player_data = cur.fetchall()
 
+        # Used in a drop down menu
         query3 = "SELECT roster_id FROM Rosters"
         cur = mysql.connection.cursor()
         cur.execute(query3)
@@ -433,7 +473,7 @@ def relations():
 
         return render_template('playersRosters.j2', pr_data = pr_data, player_data = player_data, roster_data = roster_data)
     
-    # Add a new user (Create)
+    # Add a new Relationship (Create)
     if request.method == 'POST':
         if request.form.get("addRelation"):
             player = request.form["player"]
@@ -445,11 +485,11 @@ def relations():
             mysql.connection.commit()
         
         return redirect("/playersRosters")
-    
-@app.route("/removeRelation/<int:id>")
+
 # 'Remove' a table item
+@app.route("/removeRelation/<int:id>")
 def removeRelation(id):
-    # Deletes a User (Remove)
+    # Deletes a Relation (Remove)
     query = "DELETE FROM Players_Rosters WHERE playerRoster_id = '%s';"
     cursor = mysql.connection.cursor()
     cursor.execute(query, (id,))
@@ -457,8 +497,8 @@ def removeRelation(id):
 
     return redirect("/playersRosters")
 
-@app.route("/editRelation/<int:id>", methods=["POST", "GET"])
 # Enables 'Update' funtionality for User items
+@app.route("/editRelation/<int:id>", methods=["POST", "GET"])
 def editRelation(id):
     # Renders the update template
     if request.method == "GET":
@@ -467,11 +507,13 @@ def editRelation(id):
         cursor.execute(query)
         relation_data = cursor.fetchall()
 
+        # Used in a drop down menu
         query2 = "SELECT player_id FROM Players"
         cur = mysql.connection.cursor()
         cur.execute(query2)
         player_data = cur.fetchall()
 
+        # Used in a drop down menu
         query3 = "SELECT roster_id FROM Rosters"
         cur = mysql.connection.cursor()
         cur.execute(query3)
@@ -479,7 +521,7 @@ def editRelation(id):
 
         return render_template("editPlayerRoster.j2", relation_data = relation_data, player_data = player_data, roster_data=roster_data)
     
-    # Allows database user to change row information based on user_id selection (Update)
+    # Allows database user to change row information based on playerRoster_id selection (Update)
     if request.method == "POST":
         if request.form.get("editRelation"):
             id = request.form["pr_id"]
@@ -493,10 +535,15 @@ def editRelation(id):
                 
         return redirect("/playersRosters")
     
+#-----------------------------------------------------------------
+# Filter Functions
+# Structure based on Flask Start Guide, idea was original
+#-----------------------------------------------------------------
+    
+# Display a Players table limited by Rosters.roster_id
 @app.route("/viewRoster/<int:id>")
-# 'Remove' a table item
 def viewRoster(id):
-    # Deletes a User (Remove)
+    # Renders Players table based on roster_id
     query = "SELECT Players_Rosters.roster_id as ID, Rosters.roster_name as 'Roster Name', Players.player_name as Player, Players.team_id as Team FROM Players JOIN Players_Rosters ON Players.player_id = Players_Rosters.player_id JOIN Rosters ON Players_Rosters.roster_id = Rosters.roster_id WHERE Rosters.roster_id = %s;" % (id)
     cursor = mysql.connection.cursor()
     cursor.execute(query)
@@ -504,10 +551,10 @@ def viewRoster(id):
 
     return render_template("viewRoster.j2", roster_data = roster_data)
 
+# Display a Players table limited by Teams.team_id
 @app.route("/viewTeam/<int:id>")  # BEING DEVELOPED
-# 'Remove' a table item
 def viewTeam(id):
-    # Deletes a User (Remove)
+    # Renders Players table based on team_id
     query = "SELECT Teams.team_id as ID, Teams.team_name as 'Team Name', Players.player_name as Player FROM Players JOIN Teams ON Players.team_id = Teams.team_id WHERE Teams.team_id = %s;" % (id)
     cursor = mysql.connection.cursor()
     cursor.execute(query)

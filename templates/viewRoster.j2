@@ -1,3 +1,17 @@
+<!--Project Group 14 - Sayid Ali and Gilbert Keithline-->
+<!--Date: 12/9/2024-->
+<!--Project Part 6 FINAL-->
+
+<!--Citation for: CSS implementation in Flask-->
+<!--Date: 11/19/2024-->
+<!--Copied from: Stack Overflow-->
+<!--Source URL: https://stackoverflow.com/questions/22259847/application-not-picking-up-css-file-flask-python-->
+
+<!--Citation for: Flask-Python html code-->
+<!--Date: 11/17/2024-->
+<!--Adapted from: OSU CS340 - Flask Starter App-->
+<!--Source URL: https://github.com/osu-cs340-ecampus/flask-starter-app-->
+
 <html>
 <head>
     <meta charset='utf-8'>
@@ -5,48 +19,9 @@
     <title>Slam Dunk- Players</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' href="{{ url_for('static', filename='dunk.css')}}">
-    <script language="JavaScript">
-        function reveal(command) {
-            if (command == 'add'){
-                document.getElementById('read').style.display = 'none';
-                document.getElementById('add').style.display = 'block';
-                document.getElementById('edit').style.display = 'none';
-                document.getElementById('remove').style.display = 'none';
-            }
-            else if (command == 'remove'){
-                document.getElementById('read').style.display = 'none';
-                document.getElementById('add').style.display = 'none';
-                document.getElementById('edit').style.display = 'none';
-                document.getElementById('remove').style.display = 'block';
-            }
-            else if (command =='edit'){
-                document.getElementById('read').style.display = 'none';
-                document.getElementById('add').style.display = 'none';
-                document.getElementById('edit').style.display = 'block';
-                document.getElementById('remove').style.display = 'none';
-            }
-            else if (command == 'all'){
-                document.getElementById('read').style.display = 'block';
-                document.getElementById('add').style.display = 'block';
-                document.getElementById('edit').style.display = 'block';
-                document.getElementById('remove').style.display = 'block';
-            }
-            else {
-                document.getElementById('read').style.display = 'block';
-                document.getElementById('add').style.display = 'none';
-                document.getElementById('edit').style.display = 'none';
-                document.getElementById('remove').style.display = 'none';
-            }
-        }
-        function addField() {reveal('add');}
-        function removeField(id) {reveal('remove');}
-        function editField(id) {reveal('edit');}
-        function readFields() {reveal('read');}
-        function revealAll() {reveal('all')}
-    </script>
 </head>
 
-<body onload="readFields()">
+<body>
     <header>
         <H1 align="center"><a href="/index" class="home">Slam Dunk</a></H1>
         <nav align="center" class="basketball-nav">

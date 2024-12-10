@@ -1,12 +1,22 @@
 <!--Project Group 14 - Sayid Ali and Gilbert Keithline-->
-<!--Date: 11/6/2024-->
-<!--Project Part 3 DRAFT- HTML-->
+<!--Date: 12/9/2024-->
+<!--Project Part 6 FINAL-->
 
 <!--Citation for 'reveal()' function-->
 <!--Based on Dr. Curry's function 'showForm()' as 
     demonstrated in Module 6: Exploration- Web Application Technology -->
 <!--Date: 11/05/2024-->
 <!--Source URL: https://canvas.oregonstate.edu/courses/1976520/pages/exploration-web-application-technology?module_item_id=24719064-->
+
+<!--Citation for: CSS implementation in Flask-->
+<!--Date: 11/19/2024-->
+<!--Copied from: Stack Overflow-->
+<!--Source URL: https://stackoverflow.com/questions/22259847/application-not-picking-up-css-file-flask-python-->
+
+<!--Citation for: Flask-Python html code-->
+<!--Date: 11/17/2024-->
+<!--Adapted from: OSU CS340 - Flask Starter App-->
+<!--Source URL: https://github.com/osu-cs340-ecampus/flask-starter-app-->
 
 
 <html>
@@ -24,24 +34,6 @@
                 document.getElementById('edit').style.display = 'none';
                 document.getElementById('remove').style.display = 'none';
             }
-            else if (command == 'remove'){
-                document.getElementById('read').style.display = 'none';
-                document.getElementById('add').style.display = 'none';
-                document.getElementById('edit').style.display = 'none';
-                document.getElementById('remove').style.display = 'block';
-            }
-            else if (command =='edit'){
-                document.getElementById('read').style.display = 'none';
-                document.getElementById('add').style.display = 'none';
-                document.getElementById('edit').style.display = 'block';
-                document.getElementById('remove').style.display = 'none';
-            }
-            else if (command == 'all'){
-                document.getElementById('read').style.display = 'block';
-                document.getElementById('add').style.display = 'block';
-                document.getElementById('edit').style.display = 'block';
-                document.getElementById('remove').style.display = 'block';
-            }
             else {
                 document.getElementById('read').style.display = 'block';
                 document.getElementById('add').style.display = 'none';
@@ -50,10 +42,7 @@
             }
         }
         function addField() {reveal('add');}
-        function removeField(id) {reveal('remove');}
-        function editField(id) {reveal('edit');}
         function readFields() {reveal('read');}
-        function revealAll() {reveal('all')}
     </script>
 </head>
 
